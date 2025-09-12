@@ -1,0 +1,13 @@
+==========PROGRAMACION LOGICA Y FUNCIONAL===============
+>>>>>>Nuevo Paradigma<<<<<<<<  (herramientas lips )
+
+
+-Estilos de programación 
+
+-Reglas de camel case y snake case
+
+   -camelCase: Camel case es la práctica de escribir frases o palabras compuestas sin separación o puntuación, 
+    colocando mayúsculas a cada palabra.
+
+   -snake_case: Snake case se refiere al estilo de escritura en el que cada espacio se reemplaza con un carácter 
+    de subrayado y la primera letra de cada palabra se escribe en minúsculas.
