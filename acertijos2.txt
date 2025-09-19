@@ -1,3 +1,6 @@
+17/sep/25
+
+
 Cuatro personas necesitan cruzar un puente de noche con un sola
 linterna. El puente es frágil y solo puede soportar a dos personas a
 la vez. Cada persona tarda diferentes tiempos en cruzar (1, 2 5 y 10
