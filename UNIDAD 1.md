@@ -486,6 +486,10 @@ Es una lista dentro de una lista dentro de una lista
 
 
 
+**Actividad Arbol genealogico**
+
+[arbolGenealogico](Codigo/arbologenalogico.lsp)
+
 
 
 
