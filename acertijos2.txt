@@ -1,14 +1,14 @@
 17/sep/25
 
 
-Cuatro personas necesitan cruzar un puente de noche con un sola
+1.-Cuatro personas necesitan cruzar un puente de noche con un sola
 linterna. El puente es frágil y solo puede soportar a dos personas a
 la vez. Cada persona tarda diferentes tiempos en cruzar (1, 2 5 y 10
 minutos).  Cuando dos personas cruzan, lo hacen al ritmo del más lento
 ¿Cómo pueden todos cruzar el puente en 17 minutos?
 
 
-En una calle hay cinco casas, cada una de un color distinto.  En cada
+2.-En una calle hay cinco casas, cada una de un color distinto.  En cada
 casa vive una persona de distinta nacionalidad.  Cada dueño bebe un
 único tipo de bebida, fuma una sola marca de cigarrillos y tiene una
 mascota diferente a sus vecinos.  A partir de las 15 pistas
