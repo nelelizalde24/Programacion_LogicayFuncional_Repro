@@ -119,6 +119,8 @@ ejemplo: 5
 
 - Read
 
+-mapcar
+
     ``Funcion que captura lo que escriba el usuario``
 
 - Case
@@ -472,14 +474,41 @@ iiii        DDDD
 
 
 
+
+
+
+
+
+
+
 **Lista de Asociacion**
 
 Es una lista dentro de una lista dentro de una lista
 
 ```lisp
 (detparameter *nodes* '(
-                        (())
-                        )
+                          (femenino (
+                                     (fuego (azula . "maestra fuego"))
+                                     (tierra (top))
+                                     (agua (karata))
+                                    )
+                          )
+                         (masculino ( 
+                                      (aire (Hola rayo masculino))
+                                      (fuego (Hola fuego))
+                                      (tierra (hola tierra))
+                                      (agua (poder de agua))
+                                    )
+                         
+                         )
+                         (ovni (
+                                (aire (alto))
+                                (fuego (hola fuego))
+                                (tierra (hola tierra))
+                              )
+                         
+                         )
+                       )
 )
 ```
 (Arboles de busqueda, busqueda a lo ancho)
@@ -492,7 +521,52 @@ Es una lista dentro de una lista dentro de una lista
 
 
 
+**Actividad De Funciones** 
 
+[FuncionesAct](actividadesFunLog.pdf)
 
+  1. **Problemas con car y cdr**
 
+      ```
+      Lista: (a b c d e) → d               R: (cadddr '(a b c d e))
+      
+      Lista: ((1 2) (3 4) (5 6)) → 5       R: (caaddr '((1 2) (3 4) (5 6)))
+
+      Lista: ((a b) (c d) (e f)) → e       R: (caaddr '((a b) (c d) (e f)))
+
+      Lista: ((x y) ((p q) (r s)) (z w)) → z  R: (caaddr '((x y) ((p q) (r s)) (z w)))
+
+      Lista: ((1 (2 3)) (4 (5 6))) → 6     R: (cadr (cadadr '((1 (2 3)) (4 (5 6)))))
+
+      Lista: (((a b) c) d e) → c           R: (cadar '(((a b) c) d e))
+
+      Lista: (((1 2) 3) ((4 5) 6)) → 6     R: (cadadr '(((1 2) 3) ((4 5) 6)))
+
+      Lista: ((p (q (r s))) t u) → (r s)   R: (car (cdadar '((p (q (r s))) t u)))
+
+      Lista: (((a) b) (c (d e)) f) → d     R: (car (cadadr '(((a) b) (c (d e)) f)))
+
+      Lista: ((1 (2 (3 4))) (5 6)) → 3     R: (caar (cdadar '((1 (2 (3 4))) (5 6))))
+
+      Lista: (((x) (y)) ((z) (w))) → (w)   R: (cadadr '(((x) (y)) ((z) (w))))
+
+      Lista: ((a (b (c d))) (e f)) → c     R: (caar (cdadar '((a (b (c d))) (e f))))
+
+      Lista: ((1 (2 (3 (4 5)))) (6 7)) → 4 R: (caadar (cdadar '((1 (2 (3 (4 5)))) (6 7))))
+
+      Lista: (((a b) c) ((d e) f) ((g h) i)) → g
+
+      Lista: (((x y) (z w)) ((p q)(r s))) → r
+
+      Lista: ((1 (2 (3 (4 (5 6))))) (7 8)) → 5
+
+      Lista: ((a (b (c (d e)))) (f g)) → d
+
+      Lista: (((1 2) (3 4)) ((5 6) (7 8))) → 7
+
+      Lista: ((x (y (z (w v))))) → w
+
+      Lista: (((a b c) (d e f)) ((g h i) (j k l))) → j
+
+      ```
 

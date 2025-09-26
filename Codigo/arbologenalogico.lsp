@@ -20,8 +20,8 @@
 
 
 
-(defparameter *nodes* '(   (femenino ( (familia_mama ( ( tia( (gorda( (peloNegro( (tesBlanca( (Luvia))))))) ( delgada( (peloCastallo( (tesBlanca( (Flor) )))))) )) ( prima( (delgada( (peloNegro( (tesBlanca( ("Yaneri"))))))))) ))
-                                        (familia_papa ())    ) 
+(defparameter *nodes* '(   (femenino ( (familia_mama ( ( tia( (gorda( (peloNegro( (tesBlanca( ("Luvia"))))))) ( delgada( (peloCastallo( (tesBlanca( ("Flor") )))))) )) ( prima( (delgada( (peloNegro( (tesBlanca( ("Yaneri"))))))))) ))
+                                        (familia_papa ( (tia( (alta( (tesBlanca( (delgada( (""Lorena))) (gorda( (""))))) (tesMorena( (delgada( ("Chuy") ("Mima"))) (gorda( ("Gaby"))))))) (chaparra( (tesBlanca( (delgada( (""))) (gorda( (""))))) (tesMorena( (delgada( (""))) (gorda( (""))))))) )) (prima( () )) ))    ) 
 
                             )
                         
