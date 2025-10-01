@@ -40,7 +40,7 @@
 
 ### **CLisp**
 
-**Aritmetica Preorden**
+#### **Aritmetica Preorden**
 
 3 * 3 + 2 - 3 + 10 / 2  5
 
@@ -102,8 +102,8 @@ ejemplo: 5
     3+1+1
     2+1+1+1
 
-
-**Funciones Clisp**
+---
+#### **Funciones Clisp**
 
 - Unless
 
@@ -111,7 +111,9 @@ ejemplo: 5
 
 - Cdr
 
-- Seta
+- Setq
+
+- Setf
 
 - Format
 
@@ -119,7 +121,22 @@ ejemplo: 5
 
 - Read
 
--mapcar
+- Read-Line
+
+- mapcar
+
+- assoc 
+```
+ (defparameter *nodes* '((living-room (you are in the living-room.
+  a wizard is snoring loudly on the couch.))
+    (garden (you are in a beautiful garden.
+  there is a well in front of you.))
+    (attic (you are in the attic.
+  there is a giant welding torch in the corner.))))
+
+  > (assoc 'garden *nodes*)
+ (GARDEN (YOU ARE IN A BEAUTIFUL GARDEN. THERE IS A WELL IN FRONT OF YOU.))
+ ```
 
     ``Funcion que captura lo que escriba el usuario``
 
@@ -131,7 +148,202 @@ ejemplo: 5
 
 - When 
 
-**Introduccion a CLisp**
+---
+#### **Funciones Definidas de cdr y car** (maneja cualquier tipo de dato)
+
+```lisp
+car  <- Cabeza de la lista
+>(car '(1 2 3 4 5))
+>1
+
+cdr  <- Cola de la lita
+>(cdr '(1 2 3 4 5))
+>(2 3 4 5)
+
+caar 
+>(caar '((1) 2 3 4 5))
+>(1)
+
+cadr
+>(cadr '((1) 2 3 4 5))
+>2
+
+```
+**Actividad**
+
+
+1) ``(a b (d l) (c x) m n)``
+
+    1. ``>(d l)``
+      
+        ``>(cadddr '(a b (d l) (c x) m n))``
+
+    2. ``>x``
+
+        ``(car(cdr(car)cddddr '(a b (d l) (c x) m n)))``
+
+    3. ``>d``
+        
+        ``(car(cadddr '(a b (d l) (c x) m n)))``
+
+
+2) ``(a b c (d) c f ((g h)) i j k)``
+
+    1. ``>k``
+
+        ``(cadr (cddddr (cddddr '(a b c (d) c f ((g h)) i j k))))``
+
+    2. ``>g``
+
+        ``(car (caaddr (cddddr '(a b c (d) c f ((g h)) i j k))))``
+
+    3. ``>d``
+
+        ``(car (cadddr '(a b c (d) c f ((g h)) i j k)))``
+
+    4. ``>b``
+
+        ``(cadr '(a b c (d) c f ((g h)) i j k))``
+
+3) ``(((a b c d)) 1 (2) 3 (4 5) (6 (7) 8))``
+
+    1. ``>b``
+
+        ``(cadr (caar '(((a b c d)) 1 (2) 3 (4 5) (6 (7) 8))))``
+
+    2. ``>d``
+
+        ``cadddr (caar '(((a b c d)) 1 (2) 3 (4 5) (6 (7) 8)))``
+
+    3. ``>2``
+
+        ``(caaddr '(((a b c d)) 1 (2) 3 (4 5) (6 (7) 8)))``
+
+    4. ``>7``
+
+        ``(caadr (caadr (cddddr '(((a b c d)) 1 (2) 3 (4 5) (6 (7) 8)))))``
+
+    5. ``>5``
+
+        ``(cadar (cddddr '(((a b c d)) 1 (2) 3 (4 5) (6 (7) 8))))``
+
+    6. ``>4``
+
+        ``(caar (cdddr '(((a b c d)) 1 (2) 3 (4 5) (6 (7) 8))))``
+---
+#### **Palabras reservadas if , prong, when, unless, cond**
+
+```lisp
+(if ()
+    -V     Solo imprime dos lineas de if
+    -F
+)
+(if ()
+    (progn
+        -princ / format      Con el progn puedes hacer mas funciones
+        -V
+    )
+    -F
+)
+(when ()
+                Con el when puedes hacer mas acciones como si tuviera el progn
+)
+(unless ()
+        Negacion de la condicion, hace la accion si es lo contrario a la negacion
+)
+
+(cond ()
+
+)
+
+```
+
+
+**Actividad**
+
+1.- Que calcule el sueldo que le corresponde al trabajador de una
+empresa que cobra 40.000 euros anuales, el programa debe realizar los
+cálculos en función de los siguientes criterios:
+
+- Si lleva más de 10 años en la empresa se le aplica un aumento del 10%.
+- Si lleva menos de 10 años pero más que 5 se le aplica un aumento del
+  7%.
+- Si lleva menos de 5 años pero más que 3 se le aplica un aumento del
+  5%.
+- Si lleva menos de 3 años se le aplica un aumento del 3%.()
+
+2.- Hacer un algortimo que tome el peso en libras de una cantidad de
+ropa a lavar en una lavadora y nos devuelva el nivel dependiendo del
+peso; además nos informe la cantidad de litros de agua que
+necesitamos. Se sabe que con más de 30 libras la lavadora no funcionara
+ya que es demasiado peso. Si la ropa pesa 22 ó más libras, el nivel será
+de máximo; si pesa 15 ó más nivel será de alto; si pesa 8 ó más será un
+nivel medio o de lo contrario el nivel será minimo
+
+3.- Martha va a realizar su fiesta de quince años. Por lo cual ha
+invitado a una gran cantidad de personas. Pero también ha decidido
+algunas reglas: Que todas las personas con edades mayores a los quince
+años, sólo pueden entrar si traen regalos; que jóvenes con los quince
+años cumplidos entra totalmente gratis pero los de menos de quince años
+no pueden entrar a la fiesta. Hacer un algoritmo donde se tome la edad
+de una persona y que requisito de los anteriores le toca cumplir si
+quiere entrar.
+
+```lisp 
+(defun ejercicio1 (nombre a)
+  (when(>= a 10)
+    (format t "Hola, ~a~%" nombre)
+    (format t "Tu aumento anual ~a Por tener ~a anos en la empresa ~%" (* 40000 0.1) a )
+  )
+  (when(and (< a 10) (>= a 5))
+    (format t "Hola, ~a~%" nombre)
+    (format t "Tu aumento anual ~a Por tener ~a anos en la empresa ~%" (* 40000 0.07) a )
+  )
+  (when(and (< a 5) (>= a 3))
+    (format t "Hola, ~a~%" nombre)
+    (format t "Tu aumento anual ~a Por tener ~a anos en la empresa ~%" (* 40000 0.05) a )
+  )
+  (when (< a 3)
+    (format t "Hola, ~a~%" nombre)
+    (format t "Tu aumento anual ~a Por tener ~a anos en la empresa ~%" (* 40000 0.03) a )
+  )
+)
+
+(defun ejercicio2 (a)
+  (when (>= a 30)
+  (format t "ALERTA ~%" )
+  (format t "Limite exedido:  ~a libras ~%" a )
+  )
+  (when (and (>= a 22) (< a 30))
+  (format t "Esta en su limite maximo:  ~a libras ~%" a )
+  )
+  (when (and (>= a 15) (< a 22))
+  (format t "Esta en su limite alto:  ~a libras ~%" a )
+  )
+  (when (and (>= a 8) (< a 15))
+  (format t "Esta en su limite medio:  ~a libras ~%" a )
+  )
+  (unless (>= a 8)
+  (format t "Esta en su limite minimo:  ~a libras ~%" a )
+  )
+)
+
+(defun ejercicio3 (a)
+  (when (> a 15)
+      (format t "Puedes entrar pero con regalo ~%" )
+  )
+  (when (= a 15)
+      (format t "Puedes entrar totalmente gratis ~%" )
+  )
+  (unless (>= a 15)
+    (format t "No esta permito tu pase a a la fiesta ~%" )
+  )
+)
+
+```
+
+---
+#### **Introduccion a CLisp**
 
 Para ejecutar Clisp en la ventana de comandos
 ``(load "nombreArchivo.lsp")`` y despues iniciamos la ejecucion del cualquier funcion ``(nombreFuncion "parametros")``
@@ -224,199 +436,10 @@ Para ejecutar Clisp en la ventana de comandos
   )
 )
 ```
+---
 
 
-**Funciones Definidas de Clisp** (maneja cualquier tipo de dato)
-
-```lisp
-car  <- Cabeza de la lista
->(car '(1 2 3 4 5))
->1
-
-cdr  <- Cola de la lita
->(cdr '(1 2 3 4 5))
->(2 3 4 5)
-
-caar 
->(caar '((1) 2 3 4 5))
->(1)
-
-cadr
->(cadr '((1) 2 3 4 5))
->2
-
-```
-**Actividad**
-
-
-1) ``(a b (d l) (c x) m n)``
-
-    1. ``>(d l)``
-      
-        ``>(cadddr '(a b (d l) (c x) m n))``
-
-    2. ``>x``
-
-        ``(car(cdr(car)cddddr '(a b (d l) (c x) m n)))``
-
-    3. ``>d``
-        
-        ``(car(cadddr '(a b (d l) (c x) m n)))``
-
-
-2) ``(a b c (d) c f ((g h)) i j k)``
-
-    1. ``>k``
-
-        ``(cadr (cddddr (cddddr '(a b c (d) c f ((g h)) i j k))))``
-
-    2. ``>g``
-
-        ``(car (caaddr (cddddr '(a b c (d) c f ((g h)) i j k))))``
-
-    3. ``>d``
-
-        ``(car (cadddr '(a b c (d) c f ((g h)) i j k)))``
-
-    4. ``>b``
-
-        ``(cadr '(a b c (d) c f ((g h)) i j k))``
-
-3) ``(((a b c d)) 1 (2) 3 (4 5) (6 (7) 8))``
-
-    1. ``>b``
-
-        ``(cadr (caar '(((a b c d)) 1 (2) 3 (4 5) (6 (7) 8))))``
-
-    2. ``>d``
-
-        ``cadddr (caar '(((a b c d)) 1 (2) 3 (4 5) (6 (7) 8)))``
-
-    3. ``>2``
-
-        ``(caaddr '(((a b c d)) 1 (2) 3 (4 5) (6 (7) 8)))``
-
-    4. ``>7``
-
-        ``(caadr (caadr (cddddr '(((a b c d)) 1 (2) 3 (4 5) (6 (7) 8)))))``
-
-    5. ``>5``
-
-        ``(cadar (cddddr '(((a b c d)) 1 (2) 3 (4 5) (6 (7) 8))))``
-
-    6. ``>4``
-
-        ``(caar (cdddr '(((a b c d)) 1 (2) 3 (4 5) (6 (7) 8))))``
-
-
-**Palabras reservadas**
-
-```lisp
-(if ()
-    -V     Solo imprime dos lineas de if
-    -F
-)
-(if ()
-    (progn
-        -princ / format      Con el progn puedes hacer mas funciones
-        -V
-    )
-    -F
-)
-(when ()
-                Con el when puedes hacer mas acciones como si tuviera el progn
-)
-(unless ()
-        Negacion de la condicion, hace la accion si es lo contrario a la negacion
-)
-
-```
-
-
-**Actividad**
-
-1.- Que calcule el sueldo que le corresponde al trabajador de una
-empresa que cobra 40.000 euros anuales, el programa debe realizar los
-cálculos en función de los siguientes criterios:
-
-- Si lleva más de 10 años en la empresa se le aplica un aumento del 10%.
-- Si lleva menos de 10 años pero más que 5 se le aplica un aumento del
-  7%.
-- Si lleva menos de 5 años pero más que 3 se le aplica un aumento del
-  5%.
-- Si lleva menos de 3 años se le aplica un aumento del 3%.()
-
-2.- Hacer un algortimo que tome el peso en libras de una cantidad de
-ropa a lavar en una lavadora y nos devuelva el nivel dependiendo del
-peso; además nos informe la cantidad de litros de agua que
-necesitamos. Se sabe que con más de 30 libras la lavadora no funcionara
-ya que es demasiado peso. Si la ropa pesa 22 ó más libras, el nivel será
-de máximo; si pesa 15 ó más nivel será de alto; si pesa 8 ó más será un
-nivel medio o de lo contrario el nivel será minimo
-
-3.- Martha va a realizar su fiesta de quince años. Por lo cual ha
-invitado a una gran cantidad de personas. Pero también ha decidido
-algunas reglas: Que todas las personas con edades mayores a los quince
-años, sólo pueden entrar si traen regalos; que jóvenes con los quince
-años cumplidos entra totalmente gratis pero los de menos de quince años
-no pueden entrar a la fiesta. Hacer un algoritmo donde se tome la edad
-de una persona y que requisito de los anteriores le toca cumplir si
-quiere entrar.
-
-```lisp 
-(defun ejercicio1 (nombre a)
-  (when(>= a 10)
-    (format t "Hola, ~a~%" nombre)
-    (format t "Tu aumento anual ~a Por tener ~a anos en la empresa ~%" (* 40000 0.1) a )
-  )
-  (when(and (< a 10) (>= a 5))
-    (format t "Hola, ~a~%" nombre)
-    (format t "Tu aumento anual ~a Por tener ~a anos en la empresa ~%" (* 40000 0.07) a )
-  )
-  (when(and (< a 5) (>= a 3))
-    (format t "Hola, ~a~%" nombre)
-    (format t "Tu aumento anual ~a Por tener ~a anos en la empresa ~%" (* 40000 0.05) a )
-  )
-  (when (< a 3)
-    (format t "Hola, ~a~%" nombre)
-    (format t "Tu aumento anual ~a Por tener ~a anos en la empresa ~%" (* 40000 0.03) a )
-  )
-)
-
-(defun ejercicio2 (a)
-  (when (>= a 30)
-  (format t "ALERTA ~%" )
-  (format t "Limite exedido:  ~a libras ~%" a )
-  )
-  (when (and (>= a 22) (< a 30))
-  (format t "Esta en su limite maximo:  ~a libras ~%" a )
-  )
-  (when (and (>= a 15) (< a 22))
-  (format t "Esta en su limite alto:  ~a libras ~%" a )
-  )
-  (when (and (>= a 8) (< a 15))
-  (format t "Esta en su limite medio:  ~a libras ~%" a )
-  )
-  (unless (>= a 8)
-  (format t "Esta en su limite minimo:  ~a libras ~%" a )
-  )
-)
-
-(defun ejercicio3 (a)
-  (when (> a 15)
-      (format t "Puedes entrar pero con regalo ~%" )
-  )
-  (when (= a 15)
-      (format t "Puedes entrar totalmente gratis ~%" )
-  )
-  (unless (>= a 15)
-    (format t "No esta permito tu pase a a la fiesta ~%" )
-  )
-)
-
-```
-
-**Actividad Acertijos**
+#### **Actividad y  Ejercicios**
 
 1.-Cuatro personas necesitan cruzar un puente de noche con un sola
 linterna. El puente es frágil y solo puede soportar a dos personas a
@@ -513,14 +536,14 @@ Es una lista dentro de una lista dentro de una lista
 ```
 (Arboles de busqueda, busqueda a lo ancho)
 
-
+---
 
 **Actividad Arbol genealogico**
 
 [arbolGenealogico](Codigo/arbologenalogico.lsp)
 
 
-
+---
 **Actividad De Funciones** 
 
 [FuncionesAct](actividadesFunLog.pdf)
@@ -554,19 +577,64 @@ Es una lista dentro de una lista dentro de una lista
 
       Lista: ((1 (2 (3 (4 5)))) (6 7)) → 4 R: (caadar (cdadar '((1 (2 (3 (4 5)))) (6 7))))
 
-      Lista: (((a b) c) ((d e) f) ((g h) i)) → g
+      Lista: (((a b) c) ((d e) f) ((g h) i)) → g  R: (car (caaddr '(((a b) c) ((d e) f) ((g h) i))))
 
-      Lista: (((x y) (z w)) ((p q)(r s))) → r
+      Lista: (((x y) (z w)) ((p q)(r s))) → r   R:  (car (cadadr '(((x y) (z w)) ((p q)(r s)))))
 
-      Lista: ((1 (2 (3 (4 (5 6))))) (7 8)) → 5
+      Lista: ((1 (2 (3 (4 (5 6))))) (7 8)) → 5  R:  (caar(cdadar (cdadar '((1 (2 (3 (4 (5 6))))) (7 8)))))
 
-      Lista: ((a (b (c (d e)))) (f g)) → d
+      Lista: ((a (b (c (d e)))) (f g)) → d  R: (caadar (cdadar '((a (b (c (d e)))) (f g))))
 
-      Lista: (((1 2) (3 4)) ((5 6) (7 8))) → 7
+      Lista: (((1 2) (3 4)) ((5 6) (7 8))) → 7   R: (car (cadadr '(((1 2) (3 4)) ((5 6) (7 8)))))
 
-      Lista: ((x (y (z (w v))))) → w
+      Lista: ((x (y (z (w v))))) → w  R: (caadar (cdadar '((x (y (z (w v)))))))
 
-      Lista: (((a b c) (d e f)) ((g h i) (j k l))) → j
+      Lista: (((a b c) (d e f)) ((g h i) (j k l))) → j  R: (car (cadadr '(((a b c) (d e f)) ((g h i) (j k l)))))
 
       ```
 
+
+  2. **Ejercicios de lisp**
+
+     2.1 Ejercicio 1
+
+     Dada una lista de pares clave-valor, usar ‘assoc‘ para obtener el valor de la
+     clave ‘’edad‘. Lista de ejemplo:
+
+      (setq persona '((nombre . "Ana") (edad . 23) (ciudad . "Morelia")))
+
+      Pregunta: ¿cómo obtener la edad con ‘assoc‘, ‘cdr‘ y ‘car‘?
+
+      ```lisp
+      (cdr (assoc 'edad persona))
+
+      ```
+      2.2 Ejercicio 2
+
+       Usar ‘if‘ para escribir una función que diga si el primer elemento de una lista
+       es un número positivo o no. Ejemplo:
+
+       (mi-funcion '(5 3 2)) ; => "positivo"
+
+       (mi-funcion '(-2 1 4)) ; => "no positivo"
+       
+       ```lisp
+        (defun numpositivo (lista)
+          (if (> (car lista) 0) 
+                (format t "Es positivo el primer numero de la lista ~a ~%" (car lista))
+                (format t "Es negativo el primer numero de la lista ~a ~%" (car lista))
+          )
+        )
+
+        (defparameter *nodes* '(5 3 2))
+       ```
+
+
+
+
+
+
+
+
+
+---
