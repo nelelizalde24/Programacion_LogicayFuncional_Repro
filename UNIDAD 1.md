@@ -640,3 +640,5 @@ Variables de individuo que hacen referencias a entidades referidas
 
 
 ---
+
+∀
