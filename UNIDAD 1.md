@@ -629,12 +629,14 @@ Es una lista dentro de una lista dentro de una lista
         (defparameter *nodes* '(5 3 2))
        ```
 
+---
 
 
+### **Logica de primer orden**
 
+Constante de individuo son aquellas que nos hace una referencia en especifico
 
-
-
+Variables de individuo que hacen referencias a entidades referidas
 
 
 ---
