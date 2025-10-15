@@ -596,7 +596,7 @@ Es una lista dentro de una lista dentro de una lista
 
   2. **Ejercicios de lisp**
 
-     2.1 Ejercicio 1
+     **2.1 Ejercicio 1**
 
      Dada una lista de pares clave-valor, usar ‘assoc‘ para obtener el valor de la
      clave ‘’edad‘. Lista de ejemplo:
@@ -609,7 +609,7 @@ Es una lista dentro de una lista dentro de una lista
       (cdr (assoc 'edad persona))
 
       ```
-      2.2 Ejercicio 2
+      **2.2 Ejercicio 2**
 
        Usar ‘if‘ para escribir una función que diga si el primer elemento de una lista
        es un número positivo o no. Ejemplo:
@@ -629,6 +629,124 @@ Es una lista dentro de una lista dentro de una lista
         (defparameter *nodes* '(5 3 2))
        ```
 
+       **2.3 Ejercicio 3**
+
+        Definir una función que recorra una lista de números con ‘mapcar‘ y devuelva
+        una nueva lista que contenga solo el doble de los números pares. Restricción:
+        usar ‘if‘ dentro de ‘mapcar‘.
+
+       **2.4 Ejercicio 4**
+
+        Usar ‘cond‘ para hacer una función que reciba un símbolo que puede ser
+        ‘rojo‘, ‘azul‘ o ‘verde‘ y regrese un mensaje:
+
+         • rojo → "Color cálido"
+         • azul → "Color frío"
+         • verde → "Color neutro"
+         • cualquier otro → "Color desconocido"
+
+       **2.5 Ejercicio 5**
+
+        Escribir una función que use ‘case‘ para clasificar un día de la semana (‘lunes‘,
+        ‘martes‘, ...):
+
+         • lunes a viernes → "día laboral"
+         • sábado, domingo → "fin de semana"
+
+       **2.6 Ejercicio 6**
+
+        Definir una función que reciba una lista y con ‘when‘ imprima el primer
+        elemento si la lista no está vacía.
+
+       **2.7 Ejercicio 7**
+
+        Definir una función que reciba una lista y con ‘unless‘ imprima "lista vacía"
+        cuando la lista no tenga elementos
+
+       **2.8 Ejercicio 8**
+
+        Dada una lista de listas, usar ‘mapcar‘, ‘car‘ y ‘cdr‘ para obtener una nueva
+        lista con los primeros elementos de cada sublista. 
+        
+        Ejemplo:(mi-funcion '((1 2) (3 4) (5 6))) ; => (1 3 5).
+
+       **2.9 Ejercicio 9**
+
+        Dada una lista de asociación:
+
+         (setq alumnos '((juan . 8) (maria . 10) (ana . 9)))
+
+         Escribir una función que, dado un nombre, devuelva "Aprobado" si la calificación es >= 8, o "Reprobado" en caso contrario. 
+         Usar ‘assoc‘, ‘cdr‘ y ‘if‘
+
+
+       **2.10 Ejercicio 10**
+
+       Definir una función que use ‘cond‘ para evaluar una lista de números y de volver:
+
+         • "vacía" si no hay elementos,
+         • "un solo elemento" si la lista tiene uno,
+         • "larga" si tiene más de uno.
+
+
+**Examen de Practica Lisp**
+
+   **Instrucciones.**
+
+   Responde a cada ejercicio escribiendo las funciones en Lisp.
+
+   1. Explica la diferencia entre usar ‘if‘, ‘cond‘, ‘when‘ y ‘unless‘.
+   2. ¿Qué devuelven ‘car‘ y ‘cdr‘? ¿Cómo se pueden combinar para obtener elementos intermedios de una lista?
+
+   **Ejercicio 1 - N-ésimo elemento con car/cdr**
+
+   Escribe una funcion '(n-esimo n lista)' que devuelva el n-esimo elemento de una lista utilizando solo 'car' y 'cdr'.
+
+   Ejemplo:  (n-esimo 3 '(a b c d e)) ;; => c
+
+   **Ejercicio 2 - Filtrar positivos con when**
+
+   Escribe una función ‘(filtra-positivos lista)‘ que reciba una lista de números y devuelva una nueva lista con solo los números positivos. Usa ‘when‘ dentro de un ‘mapcar‘ o ‘loop‘.
+
+   Ejemplo: (filtra-positivos '(-2 0 3-5 7)) ;; => (3 7)
+
+   **Ejercicio 3 - Clasificacion con cond** 
+
+   Escribe una función ‘(clasifica-numero n)‘ que:
+
+    • Devuelva ‘"Negativo"‘ si n < 0
+    • Devuelva ‘"Cero"‘ si n = 0
+    • Devuelva ‘"Pequeño"‘ si 1 <= n <= 10
+    • Devuelva ‘"Mediano"‘ si 11 <= n <= 100
+    • Devuelva ‘"Grande"‘ si n > 100
+    Ejemplo:
+    (clasifica-numero 57) ;; => "Mediano"
+
+
+   **Ejercicio 4 - Suma de pares con unless**
+
+   Escribe una función ‘(suma-pares lista)‘ que:
+
+    • Devuelva la suma de todos los números pares en la lista.
+    • Ignore los impares usando ‘unless‘.
+    Ejemplo:
+    (suma-pares '(1 2 3 4 5 6)) ;; => 12
+
+
+   **Ejercicio 5 - Procesamiento de car y cdr**
+
+   Escribe una función ‘(procesa-lista lista)‘ que:
+
+    1. Si la lista está vacía → devuelve ‘"Lista vacía"‘.
+    2. Si el primer elemento (‘car‘) es un número mayor a 50 → devuelve ‘"Grande"‘.
+    3. Si el primer elemento es una sublista → devuelve ‘"Sublista detectada"‘.
+    4. En cualquier otro caso → devuelve ‘"Caso general"‘.
+    Ejemplos:
+    (procesa-lista '()) ;; => "Lista vacía"
+    (procesa-lista '(60 1 2)) ;; => "Grande"
+    (procesa-lista '((1 2) 3 4)) ;; => "Sublista detectada"
+    (procesa-lista '(10 20 30)) ;; => "Caso general"
+
 ---
 
 
@@ -638,7 +756,16 @@ Constante de individuo son aquellas que nos hace una referencia en especifico
 
 Variables de individuo que hacen referencias a entidades referidas
 
+![AcertijoGranjero](img/prolog.jpg)
 
 ---
 
-∀
+Unificacion de prolog
+
+factorial(0, 1).
+factorial(X, F):- X1 is X - 1,
+factorial(X1 , F1), F is X * F1.
+
+Fibonacci 
+Multiplicacion con sumas
+Divicion con resta
