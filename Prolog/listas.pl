@@ -4,3 +4,8 @@ sumar([X|Y],R):-sumar(Y,R1), R is R1 + X.
 
 rotar(X,X,0).
 rotar([X|Y],L,N):-N1 is N-1, append(Y,[X],Y1),rotar(Y1,L,N1).
+
+
+cabe_cola([],C,T):- cabe_cola([],[C],[|T]).
+
+pertenece(b, [a,b,c]).
