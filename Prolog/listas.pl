@@ -6,6 +6,12 @@ rotar(X,X,0).
 rotar([X|Y],L,N):-N1 is N-1, append(Y,[X],Y1),rotar(Y1,L,N1).
 
 
-cabe_cola([],C,T):- cabe_cola([],[C],[|T]).
+cabeza_cola([C|T],C,T).
 
-pertenece(b, [a,b,c]).
+
+pertenece(X, T):- member(X, T).
+
+longitud([],0).
+longitud([X|Y],N):- longitud(Y,N1), N is N1+1.
+
+concatenar(X, Y, R):- append(X,Y,R).
