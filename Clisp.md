@@ -1,44 +1,17 @@
-# UNIDAD 1
+# Clisp
 
 ## Indice
 
 - [Mi Repositorio](README.md)
     - [Indice](#indice)
-        - [Unidad 1](#unidad-1)
-            - [Estilos de Programacion](#estilos-de-programacion)
-         - [Unidad 2]()
-         - [Unidad 3]()
-         - [Unidad 4]()
+        - [Introduccion](README.md)
+         - [Clisp](Clisp.md)
+         - [Prolog](Prolog.md)
+         - [Proyecto Final]()
 
 
 
 ---
-
-### **Estilos de programacion**
-
--  ***camelCase:*** 
-
-    El caso camello es una convención de nomenclatura en la que varias palabras se unen sin espacios, y cada palabra comienza con una letra mayúscula excepto la primera palabra. Este estilo se usa comúnmente en programación para nombrar variables, funciones y métodos.
-
-    En el caso del camello, la primera palabra se escribe en minúsculas y cada palabra posterior comienza con una letra mayúscula. Esto hace que las "jorobas" de las letras mayúsculas se parezcan a las jorobas de un camello, de ahí el nombre. Por ejemplo:
-
-    ```
-    numberOfDonuts = 34
-    favePhrase = "Hello World"
-    ```
-
-- ***snake_case:***
-
-    El caso de serpiente es una convención de nomenclatura en la que cada espacio de una frase se reemplaza con un carácter de subrayado ( _ ) y todas las palabras se escriben en minúsculas. Este estilo se usa a menudo para nombres de variables y métodos en programación, así como para nombres de archivos.
-
-    ```
-    number_of_donuts = 34
-    fave_phrase = "Hola mundo"
-    ```
-
----
-
-### **CLisp**
 
 #### **Aritmetica Preorden**
 
@@ -95,7 +68,10 @@ int f(int x)
 ```
 
 Implementar un algoritmo que imprima todas las posibles descomposiciones de un numero natal como suma de numeros menores que el.
-ejemplo: 5
+ejemplo: 
+
+      5
+
     1+1+1+1+1
     2+2+1
     3+2
@@ -748,24 +724,3 @@ Es una lista dentro de una lista dentro de una lista
     (procesa-lista '(10 20 30)) ;; => "Caso general"
 
 ---
-
-
-### **Logica de primer orden**
-
-Constante de individuo son aquellas que nos hace una referencia en especifico
-
-Variables de individuo que hacen referencias a entidades referidas
-
-![AcertijoGranjero](img/prolog.jpg)
-
----
-
-Unificacion de prolog
-
-factorial(0, 1).
-factorial(X, F):- X1 is X - 1,
-factorial(X1 , F1), F is X * F1.
-
-Fibonacci 
-Multiplicacion con sumas
-Divicion con resta
