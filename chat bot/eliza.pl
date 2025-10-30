@@ -4,7 +4,7 @@ eliza:-	writeln('Hola , mi nombre es  Eliza tu  chatbot,
 	usar solo minusculas con punto . al final:'),
 	readln(Input),
 	eliza(Input),!.
-eliza(Input):- Input == ['Adios'],
+eliza(Input):- Input == ['Adios', '.'],
 	writeln('Adios. espero poder verte ayudado.'), !.
 eliza(Input):- Input == ['adios', '.'],
 	writeln('Adios. espero poder verte ayudado.'), !.
@@ -19,7 +19,8 @@ eliza(Input) :-
 	eliza(Input1), !.
 
 template([hola, mi, nombre, es, s(_), '.'], ['Hola', 0, 'Como', estas, tu, '?'], [4]).
-template([bien ,s(_) ,y ,tu , '.'], ['bien',tambien, 0, por que, tu , estas , bien, '.' ], [1]).
+template([estoy, bien, y ,tu, '.'], ['tambien','estoy' ,'bien' , 'por que','estas', 'bien', '?' ],[]).
+
 template([buendia, mi, nombre, es, s(_), '.'], ['buen dia', 'Como', estas, tu, 0, '?'], [4]).
 
 template([hola, ',', mi, nombre, es, s(_), '.'], ['Hola', 0, 'Como', estas, tu, '?'], [5]).
@@ -35,6 +36,8 @@ template([yo, soy, s(_),'.'], [porque, eres, tu, 0, '?'], [2]).
 % pregunta algo que le gusta a eliza
 template([te, gustan, las, s(_), _], [flagLike], [3]).
 template([te, gustan, los, s(_), _], [flagLike], [3]).
+template([te, gusta, hacer, s(_), _], [flagLike], [3]).
+template([te, gusta, s(_), _], [flagLike], [2]).
 
 		 % pregunta algo que hace eliza
 template([tu, eres, s(_), _], [flagDo], [2]).
@@ -60,8 +63,15 @@ likes(apples).
 likes(ponies).
 likes(zombies).
 likes(manzanas).
+likes(perros).
+likes(animales).
+like(gatos).
 likes(computadoras).
-like(carros).
+likes(carros).
+likes(ejercicio).
+likes(deporte).
+likes(platicar).
+likes(viajar).
 
 
 
