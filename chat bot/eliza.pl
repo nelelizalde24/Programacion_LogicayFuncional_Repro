@@ -20,6 +20,13 @@ eliza(Input) :-
 
 template([hola, mi, nombre, es, s(_), '.'], ['Hola', 0, 'Como', estas, tu, '?'], [4]).
 template([estoy, bien, y ,tu, '.'], ['tambien','estoy' ,'bien' , 'por que','estas', 'bien', '?' ],[]).
+template([bien, _], ['Que', 'bien', 'me', 'alegro', ':)'], []).
+
+template([estoy, mal, y ,tu, '.'], ['tambien','estoy' ,'mal' , 'por que','estas', 'mal', '?' ],[]).
+template([mal, _], ['Que', 'mal', 'te', 'entiendo', ':('], []).
+
+template([oye, necesito, ayuda, '.'], ['En', 'que', te, puedo, ayudar, '?'], []).
+template([cual, es, el, teorema, de, pitagoras, '.'], ['La', 'formula', 'matematica', 'que', 'expresa', 'esta', 'relacion', 'es', 'a^{2}+b^{2}=c^{2}', 'donde (a) y (b) son los catetos y (c) es la hipotenusa'], []).
 
 template([buendia, mi, nombre, es, s(_), '.'], ['buen dia', 'Como', estas, tu, 0, '?'], [4]).
 
@@ -65,7 +72,7 @@ likes(zombies).
 likes(manzanas).
 likes(perros).
 likes(animales).
-like(gatos).
+likes(gatos).
 likes(computadoras).
 likes(carros).
 likes(ejercicio).
@@ -106,6 +113,7 @@ match([S|Stim],[_|Input]) :-
 	match(Stim, Input),!.
 
 replace0([], _, _, Resp, R):- append(Resp, [], R),!.
+replace0([], _, Resp, R):- append(Resp, [], R),!.
 
 % Eliza likes:
 replace0([I|_], Input, _, Resp, R):-
