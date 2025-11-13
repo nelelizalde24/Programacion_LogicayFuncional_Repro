@@ -11,3 +11,16 @@
 
    -snake_case: Snake case se refiere al estilo de escritura en el que cada espacio se reemplaza con un carácter 
     de subrayado y la primera letra de cada palabra se escribe en minúsculas.
+
+
+
+    Sisema experto : tetanos,barisela,zica
+    Investigar las enfermedades,y hacer algo parecido al sistema experto de enfermedades
+    que esta en dianostico medico.
+
+    tetanos: sisntomas (espamos musculares, rigidez muscular, dificultad para tragar, convulciones)
+
+    vacuna (tetanos-difteria)
+
+    
+
