@@ -18,6 +18,7 @@ eliza(Input) :-
 	readln(Input1),
 	eliza(Input1), !.
 
+
 template([hola, mi, nombre, es, s(_), '.'], ['Hola', 0, 'Como', estas, tu, '?'], [4]).
 template([estoy, bien, y ,tu, '.'], ['tambien','estoy' ,'bien' , 'por que','estas', 'bien', '?' ],[]).
 template([bien, _], ['Que', 'bien', 'me', 'alegro', ':)'], []).
@@ -53,6 +54,32 @@ template([que, eres, tu, s(_)], [flagIs], [2]).
 template([eres, s(_), '?'], [flagIs], [2]).
 
 template([como, estas, tu, '?'], [yo, estoy, bien, ',', gracias, por, preguntar, '.'], []).
+
+% Base de datos de enfermedades y síntomas
+% Tétanos
+tiene_sintoma(tetanos, rigidez_mandibula).
+tiene_sintoma(tetanos, espasmos_musculares).
+tiene_sintoma(tetanos, trismo).
+
+% Varicela
+tiene_sintoma(varicela, ampollas_piel).
+tiene_sintoma(varicela, fiebre).
+tiene_sintoma(varicela, picazon_intensa).
+
+% Zika
+tiene_sintoma(zika, fiebre_alta).
+tiene_sintoma(zika, dolor_articulaciones).
+tiene_sintoma(zika, erupciones_cutaneas).
+
+% Tratamientos
+tratamiento(tetanos, 'Aplicar vacuna antitetanica, reposo absoluto, evitar movimientos bruscos y hospitalizacion en caso grave').
+tratamiento(varicela, 'Antivirales como aciclovir, mantener hidratacion, reposo y lociones calmantes para la picazon').
+tratamiento(zika, 'Descanso prolongado, hidratacion constante, analgesicos para el dolor y consulta medica inmediata').
+
+enfermedad(tetanos).
+enfermedad(varicela).
+enfermedad(zika).
+
 
 template([yo, pienso, que, _], [bueno, esa, es, tu, opinion], []).
 template([porque, _], [esa, no, es, una, buena, razon, '.'], []).
@@ -98,6 +125,57 @@ is0(nice).
 is0(fine).
 is0(happy).
 is0(redundant).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Información de síntomas por enfermedad
+sintomas_enfermedad(tetanos, [rigidez_mandibula, espasmos_musculares, trismo]).
+sintomas_enfermedad(varicela, [ampollas_piel, fiebre, picazon_intensa]).
+sintomas_enfermedad(zika, [fiebre_alta, dolor_articulaciones, erupciones_cutaneas]).
+
+% Regla: diagnostico_exclusivo/2
+% Se cumple cuando el paciente confirma un síntoma único que no se presenta en ninguna otra enfermedad
+diagnostico_exclusivo(Paciente, Enfermedad) :-
+	tiene_sintoma(Enfermedad, Sintoma),
+	\+ tiene_sintoma_en_otra_enfermedad(Sintoma, Enfermedad),
+	format('Diagnostico exclusivo para ~w: ~w (Síntoma único: ~w)~n', [Paciente, Enfermedad, Sintoma]).
+
+% Predicado auxiliar: verifica si un síntoma aparece en alguna otra enfermedad
+tiene_sintoma_en_otra_enfermedad(Sintoma, EnfermedadExcluida) :-
+	tiene_sintoma(Enfermedad, Sintoma),
+	Enfermedad \== EnfermedadExcluida.
+
+% Base de datos de síntomas confirmados por paciente
+% Formato: sintoma_confirmado(Paciente, Sintoma)
+sintoma_confirmado(juan, rigidez_mandibula).
+sintoma_confirmado(juan, espasmos_musculares).
+sintoma_confirmado(maria, ampollas_piel).
+sintoma_confirmado(maria, fiebre).
+sintoma_confirmado(maria, picazon_intensa).
+sintoma_confirmado(pedro, fiebre_alta).
+sintoma_confirmado(pedro, dolor_articulaciones).
+
+% Regla: probabilidad/3
+% Calcula el porcentaje de síntomas confirmados respecto al total de síntomas de una enfermedad
+% Porcentaje = (Confirmados / Totales) * 100
+probabilidad(Paciente, Enfermedad, Porcentaje) :-
+	% Obtener todos los síntomas de la enfermedad usando findall
+	findall(Sintoma, tiene_sintoma(Enfermedad, Sintoma), TodosSintomas),
+	length(TodosSintomas, TotalSintomas),
+	% Obtener todos los síntomas confirmados del paciente que pertenecen a esta enfermedad
+	findall(Sintoma, (sintoma_confirmado(Paciente, Sintoma), tiene_sintoma(Enfermedad, Sintoma)), SintomasConfirmados),
+	length(SintomasConfirmados, SintomasConfirmadosCount),
+	% Calcular el porcentaje
+	(TotalSintomas > 0 ->
+		Porcentaje is (SintomasConfirmadosCount / TotalSintomas) * 100
+	;
+		Porcentaje is 0
+	),
+	% Mostrar resultado
+	format('Paciente: ~w~nEnfermedad: ~w~nSíntomas confirmados: ~w de ~w~nProbabilidad: ~2f%~n', 
+		[Paciente, Enfermedad, SintomasConfirmadosCount, TotalSintomas, Porcentaje]).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 match([],[]).
 match([], _):- true.
