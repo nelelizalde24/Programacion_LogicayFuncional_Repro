@@ -1,478 +1,806 @@
-# Clisp
+# CLISP - Programación Funcional
 
-## Indice
+## Índice
 
-- [Mi Repositorio](README.md)
-    - [Indice](#indice)
-        - [Introduccion](README.md)
-         - [Clisp](Clisp.md)
-         - [Prolog](Prolog.md)
-         - [Proyecto Final]()
+- [Introducción a CLISP](#introducción-a-clisp)
+- [Conceptos Fundamentales](#conceptos-fundamentales)
+- [Operadores Aritméticos y Expresiones](#operadores-aritméticos-y-expresiones)
+- [Funciones Básicas](#funciones-básicas)
+- [Control de Flujo](#control-de-flujo)
+- [Operaciones con Listas](#operaciones-con-listas)
+- [Funciones Definidas por el Usuario](#funciones-definidas-por-el-usuario)
+- [Ejercicios y Actividades](#ejercicios-y-actividades)
+- [Examen de Práctica](#examen-de-práctica)
 
+---
 
+## Introducción a CLISP
+
+**CLISP** (Common Lisp) es un lenguaje de programación funcional potente y flexible. Se basa en el paradigma de programación funcional donde:
+- Las funciones son objetos de primera clase
+- Los datos se representan como listas
+- La evaluación es el mecanismo principal de ejecución
+
+### Características principales:
+- **Lenguaje interpretado**: Se ejecuta línea a línea
+- **Manejo de listas**: Las listas son la estructura de datos fundamental
+- **Funciones de orden superior**: Las funciones pueden recibir y retornar funciones
+- **Recursión**: Herramienta clave para resolver problemas
+- **Síntesis de programas**: Código que genera código
+
+### Instalación y Ejecución
+
+Para ejecutar archivos en CLISP desde la línea de comandos:
+```bash
+clisp archivo.lsp
+```
+
+O de forma interactiva:
+```bash
+clisp
+[1]> (load "archivo.lsp")
+[2]> (nombre_funcion parámetros)
+```
 
 ---
 
-#### **Aritmetica Preorden**
+## Conceptos Fundamentales
 
-3 * 3 + 2 - 3 + 10 / 2  5
+### Símbolos y Valores
 
-Arbol Binario
-![arbolbinario1](img/arbol1.png)
+En CLISP, los símbolos son identificadores que representan conceptos:
+```lisp
+; Símbolos simples
+juan
+maria
+gato
 
+; Números
+42
+3.14
+-10
 
-6 + 6 + 3 * 5 * 6 + 10 + 2 - 3
-
-
-7 + 7 * 3 + 1 + 6 * 3 + 10 / 2
-
-
-6 + 4 * 7 + 5 + 6 + 3 + 2 - 3
-
-
-
-**Actividad**   03/09/25
-
-a)  `6 + 4 * 7 + 5 + 6 + 3 + 2 - 3`
-
-![arbolbinario2](img/arbol2.png)
-
-b) `6 + 12 + 9 + 8 * 3 * 6 * 2 + 2`
-
-
-c) `6 / 2 * 5 + 6 * 3 + 9 + 8 + 9`
-
-Implementar una funcion que valide la siguiente cadena
-
-a) `( ( ) ) ) ( ( )`
-
-b) `( ( ) ) ( ) ( ) )`
-
-c) `( ) ( ) ) ( ( ) )`
-
-d) `( ( ( ) ) ) ( ) ( )`
-
-Prueba de escritorio
-
-```
-int f(int x)
-{
-    if (x>100)
-    {
-    return (x-10);
-    }
-    else {
-        retrun(f(f(x+1)));
-    }
-}
+; Cadenas
+"Hola mundo"
+"Sistema experto"
 ```
 
-Implementar un algoritmo que imprima todas las posibles descomposiciones de un numero natal como suma de numeros menores que el.
-ejemplo: 
-
-      5
-
-    1+1+1+1+1
-    2+2+1
-    3+2
-    3+1+1
-    2+1+1+1
-
----
-#### **Funciones Clisp**
-
-- Unless
-
-- Let
-
-- Cdr
-
-- Setq
-
-- Setf
-
-- Format
-
-- Princ
-
-- Read
-
-- Read-Line
-
-- mapcar
-
-- assoc 
-```
- (defparameter *nodes* '((living-room (you are in the living-room.
-  a wizard is snoring loudly on the couch.))
-    (garden (you are in a beautiful garden.
-  there is a well in front of you.))
-    (attic (you are in the attic.
-  there is a giant welding torch in the corner.))))
-
-  > (assoc 'garden *nodes*)
- (GARDEN (YOU ARE IN A BEAUTIFUL GARDEN. THERE IS A WELL IN FRONT OF YOU.))
- ```
-
-    ``Funcion que captura lo que escriba el usuario``
-
-- Case
-
-- Car 
-
-- Append 
-
-- When 
-
----
-#### **Funciones Definidas de cdr y car** (maneja cualquier tipo de dato)
+### Variables y Asignación
 
 ```lisp
-car  <- Cabeza de la lista
->(car '(1 2 3 4 5))
->1
+; setq: asigna un valor a una variable
+(setq nombre "Juan")
+(setq edad 25)
+(setq lista '(1 2 3 4 5))
 
-cdr  <- Cola de la lita
->(cdr '(1 2 3 4 5))
->(2 3 4 5)
+; defparameter: define parámetros globales
+(defparameter *contador* 0)
+(defparameter *lista-personas* '(juan maria carlos))
 
-caar 
->(caar '((1) 2 3 4 5))
->(1)
-
-cadr
->(cadr '((1) 2 3 4 5))
->2
-
+; let: define variables locales
+(let ((x 10) (y 20))
+  (+ x y))  ; => 30
 ```
-**Actividad**
 
-
-1) ``(a b (d l) (c x) m n)``
-
-    1. ``>(d l)``
-      
-        ``>(cadddr '(a b (d l) (c x) m n))``
-
-    2. ``>x``
-
-        ``(car(cdr(car)cddddr '(a b (d l) (c x) m n)))``
-
-    3. ``>d``
-        
-        ``(car(cadddr '(a b (d l) (c x) m n)))``
-
-
-2) ``(a b c (d) c f ((g h)) i j k)``
-
-    1. ``>k``
-
-        ``(cadr (cddddr (cddddr '(a b c (d) c f ((g h)) i j k))))``
-
-    2. ``>g``
-
-        ``(car (caaddr (cddddr '(a b c (d) c f ((g h)) i j k))))``
-
-    3. ``>d``
-
-        ``(car (cadddr '(a b c (d) c f ((g h)) i j k)))``
-
-    4. ``>b``
-
-        ``(cadr '(a b c (d) c f ((g h)) i j k))``
-
-3) ``(((a b c d)) 1 (2) 3 (4 5) (6 (7) 8))``
-
-    1. ``>b``
-
-        ``(cadr (caar '(((a b c d)) 1 (2) 3 (4 5) (6 (7) 8))))``
-
-    2. ``>d``
-
-        ``cadddr (caar '(((a b c d)) 1 (2) 3 (4 5) (6 (7) 8)))``
-
-    3. ``>2``
-
-        ``(caaddr '(((a b c d)) 1 (2) 3 (4 5) (6 (7) 8)))``
-
-    4. ``>7``
-
-        ``(caadr (caadr (cddddr '(((a b c d)) 1 (2) 3 (4 5) (6 (7) 8)))))``
-
-    5. ``>5``
-
-        ``(cadar (cddddr '(((a b c d)) 1 (2) 3 (4 5) (6 (7) 8))))``
-
-    6. ``>4``
-
-        ``(caar (cdddr '(((a b c d)) 1 (2) 3 (4 5) (6 (7) 8))))``
----
-#### **Palabras reservadas if , prong, when, unless, cond**
+### Evaluación y Cita
 
 ```lisp
-(if ()
-    -V     Solo imprime dos lineas de if
-    -F
-)
-(if ()
+; Evaluación normal
+(+ 2 3)  ; => 5
+
+; Cita (quote): previene la evaluación
+'juan           ; => juan (no lo evalúa)
+'(1 2 3)        ; => (1 2 3) lista literal
+'(+ 2 3)        ; => (+ 2 3) expresión sin evaluar
+
+; Backquote y coma para templating
+`(persona ,nombre edad ,edad)  ; interpola variables
+```
+
+---
+
+## Operadores Aritméticos y Expresiones
+
+### Notación Prefija
+
+CLISP usa notación prefija (operador primero):
+```lisp
+; Suma
+(+ 2 3)        ; => 5
+(+ 1 2 3 4 5)  ; => 15
+
+; Resta
+(- 10 3)       ; => 7
+(- 20 5 3)     ; => 12
+
+; Multiplicación
+(* 4 5)        ; => 20
+(* 2 3 4)      ; => 24
+
+; División
+(/ 20 4)       ; => 5
+(/ 100 3)      ; => 33.333...
+
+; Potencia
+(expt 2 3)     ; => 8 (2^3)
+
+; Resto/Módulo
+(mod 10 3)     ; => 1
+(rem 10 3)     ; => 1
+```
+
+### Árboles Binarios de Expresiones
+
+La expresión `3 * 3 + 2 - 3 + 10 / 2 = 5` se representa como:
+
+```
+        +
+       / \
+      +   /
+     / \ / \
+    -  2 10 2
+   / \
+  *   3
+ / \
+3   3
+```
+
+En CLISP (notación prefija):
+```lisp
+(+ (- (+ (* 3 3) 2) 3) (/ 10 2))  ; => 5
+```
+
+### Ejemplos de Expresiones Complejas
+
+```lisp
+; 6 + 4 * 7 + 5 + 6 + 3 + 2 - 3
+(+ (+ (+ (+ (+ 6 (* 4 7)) 5) 6) 3) 2) 3)  ; => 40
+
+; 6 + 12 + 9 + 8 * 3 * 6 * 2 + 2
+(+ (+ (+ 6 12) 9) (* (* (* 8 3) 6) 2) 2)  ; => 323
+
+; 6 / 2 * 5 + 6 * 3 + 9 + 8 + 9
+(+ (+ (+ (* (/ 6 2) 5) (* 6 3)) 9) 8) 9)  ; => 68
+```
+
+---
+
+## Funciones Básicas
+
+### Funciones de E/S (Entrada/Salida)
+
+```lisp
+; princ: imprime sin salto de línea
+(princ "Hola")           ; => Holanil
+
+; format: imprime formateado
+(format t "Hola ~a~%" nombre)      ; t = salida estándar
+(format t "Número: ~d~%" 42)       ; ~d para números enteros
+(format t "Real: ~f~%" 3.14)       ; ~f para decimales
+
+; writeln: escribe con salto de línea
+(writeln "Mensaje")
+
+; read: lee una expresión Lisp
+(setq x (read))         ; espera entrada del usuario
+
+; read-line: lee una línea de texto
+(setq nombre (read-line))
+```
+
+### Operadores Lógicos
+
+```lisp
+; and: AND lógico
+(and t t)              ; => t (verdadero)
+(and t nil)            ; => nil (falso)
+(and (> 5 3) (< 2 4))  ; => t
+
+; or: OR lógico
+(or nil nil)           ; => nil
+(or t nil)             ; => t
+(or (< 5 3) (> 10 5))  ; => t
+
+; not: negación
+(not t)                ; => nil
+(not nil)              ; => t
+(not (= 5 5))          ; => nil
+```
+
+### Operadores Relacionales
+
+```lisp
+; Igualdad y comparación numérica
+(= 5 5)               ; => t
+(= 5 6)               ; => nil
+(> 10 5)              ; => t
+(< 3 8)               ; => t
+(>= 5 5)              ; => t
+(<= 3 5)              ; => t
+(/= 5 3)              ; => t (no igual)
+
+; Comparación de símbolos
+(eq 'juan 'juan)      ; => t
+(eql 'juan 'juan)     ; => t
+(equal '(1 2) '(1 2)) ; => t
+```
+
+---
+
+## Control de Flujo
+
+### if - Condicional Simple
+
+```lisp
+; Sintaxis: (if condición valor-verdadero valor-falso)
+(if (> 5 3)
+    (format t "5 es mayor que 3~%")
+    (format t "5 no es mayor que 3~%"))
+
+; if con múltiples acciones (requiere progn)
+(if (< edad 18)
     (progn
-        -princ / format      Con el progn puedes hacer mas funciones
-        -V
-    )
-    -F
-)
-(when ()
-                Con el when puedes hacer mas acciones como si tuviera el progn
-)
-(unless ()
-        Negacion de la condicion, hace la accion si es lo contrario a la negacion
-)
-
-(cond ()
-
-)
-
+      (format t "Eres menor de edad~%")
+      (format t "No puedes votar~%"))
+    (format t "Puedes votar~%"))
 ```
 
+### when - Cuando la Condición es Verdadera
 
-**Actividad**
+```lisp
+; when: ejecuta acciones si la condición es verdadera
+; (equivalente a if sin rama falsa, pero permite múltiples acciones sin progn)
+(when (> edad 18)
+  (format t "Eres mayor de edad~%")
+  (format t "Tienes responsabilidades legales~%"))
 
-1.- Que calcule el sueldo que le corresponde al trabajador de una
-empresa que cobra 40.000 euros anuales, el programa debe realizar los
-cálculos en función de los siguientes criterios:
+(when (string= nombre "")
+  (format t "El nombre no puede estar vacío~%"))
+```
 
-- Si lleva más de 10 años en la empresa se le aplica un aumento del 10%.
-- Si lleva menos de 10 años pero más que 5 se le aplica un aumento del
-  7%.
-- Si lleva menos de 5 años pero más que 3 se le aplica un aumento del
-  5%.
-- Si lleva menos de 3 años se le aplica un aumento del 3%.()
+### unless - Cuando la Condición es Falsa
 
-2.- Hacer un algortimo que tome el peso en libras de una cantidad de
-ropa a lavar en una lavadora y nos devuelva el nivel dependiendo del
-peso; además nos informe la cantidad de litros de agua que
-necesitamos. Se sabe que con más de 30 libras la lavadora no funcionara
-ya que es demasiado peso. Si la ropa pesa 22 ó más libras, el nivel será
-de máximo; si pesa 15 ó más nivel será de alto; si pesa 8 ó más será un
-nivel medio o de lo contrario el nivel será minimo
+```lisp
+; unless: ejecuta acciones si la condición es FALSA
+; (negación de when)
+(unless (< edad 18)
+  (format t "Eres mayor de edad~%"))
 
-3.- Martha va a realizar su fiesta de quince años. Por lo cual ha
-invitado a una gran cantidad de personas. Pero también ha decidido
-algunas reglas: Que todas las personas con edades mayores a los quince
-años, sólo pueden entrar si traen regalos; que jóvenes con los quince
-años cumplidos entra totalmente gratis pero los de menos de quince años
-no pueden entrar a la fiesta. Hacer un algoritmo donde se tome la edad
-de una persona y que requisito de los anteriores le toca cumplir si
-quiere entrar.
+(unless (= saldo 0)
+  (format t "Tienes dinero disponible~%"))
+```
 
-```lisp 
-(defun ejercicio1 (nombre a)
-  (when(>= a 10)
-    (format t "Hola, ~a~%" nombre)
-    (format t "Tu aumento anual ~a Por tener ~a anos en la empresa ~%" (* 40000 0.1) a )
-  )
-  (when(and (< a 10) (>= a 5))
-    (format t "Hola, ~a~%" nombre)
-    (format t "Tu aumento anual ~a Por tener ~a anos en la empresa ~%" (* 40000 0.07) a )
-  )
-  (when(and (< a 5) (>= a 3))
-    (format t "Hola, ~a~%" nombre)
-    (format t "Tu aumento anual ~a Por tener ~a anos en la empresa ~%" (* 40000 0.05) a )
-  )
-  (when (< a 3)
-    (format t "Hola, ~a~%" nombre)
-    (format t "Tu aumento anual ~a Por tener ~a anos en la empresa ~%" (* 40000 0.03) a )
-  )
-)
+### cond - Múltiples Condiciones
 
-(defun ejercicio2 (a)
-  (when (>= a 30)
-  (format t "ALERTA ~%" )
-  (format t "Limite exedido:  ~a libras ~%" a )
-  )
-  (when (and (>= a 22) (< a 30))
-  (format t "Esta en su limite maximo:  ~a libras ~%" a )
-  )
-  (when (and (>= a 15) (< a 22))
-  (format t "Esta en su limite alto:  ~a libras ~%" a )
-  )
-  (when (and (>= a 8) (< a 15))
-  (format t "Esta en su limite medio:  ~a libras ~%" a )
-  )
-  (unless (>= a 8)
-  (format t "Esta en su limite minimo:  ~a libras ~%" a )
-  )
-)
+```lisp
+; cond: permite múltiples condiciones (como switch/case)
+(cond
+  ((< edad 13) (format t "Eres un niño~%"))
+  ((< edad 18) (format t "Eres un adolescente~%"))
+  ((< edad 65) (format t "Eres un adulto~%"))
+  (t (format t "Eres un adulto mayor~%")))  ; t es la opción por defecto
+```
 
-(defun ejercicio3 (a)
-  (when (> a 15)
-      (format t "Puedes entrar pero con regalo ~%" )
-  )
-  (when (= a 15)
-      (format t "Puedes entrar totalmente gratis ~%" )
-  )
-  (unless (>= a 15)
-    (format t "No esta permito tu pase a a la fiesta ~%" )
-  )
-)
+### case - Selección por Valor
 
+```lisp
+; case: selecciona según el valor de una expresión
+(case dia
+  ((lunes martes miercoles jueves viernes) 
+    (format t "Día laboral~%"))
+  ((sabado domingo) 
+    (format t "Fin de semana~%"))
+  (otherwise 
+    (format t "Día desconocido~%")))
 ```
 
 ---
-#### **Introduccion a CLisp**
 
-Para ejecutar Clisp en la ventana de comandos
-``(load "nombreArchivo.lsp")`` y despues iniciamos la ejecucion del cualquier funcion ``(nombreFuncion "parametros")``
+## Operaciones con Listas
+
+### Funciones de Acceso
 
 ```lisp
-(defun suma(a b)
-  (+ a b)
-)
+; car: primer elemento
+(car '(1 2 3 4 5))        ; => 1
+(car '(a b c))            ; => a
 
-(defun areacuadro(a b)
-  (* a b)
-)
+; cdr: resto de la lista (todos menos el primero)
+(cdr '(1 2 3 4 5))        ; => (2 3 4 5)
+(cdr '(a b c))            ; => (b c)
 
+; Combinaciones:
+; caar: car del car
+(caar '((1 2) 3 4))       ; => 1
+
+; cadr: car del cdr (segundo elemento)
+(cadr '(a b c))           ; => b
+
+; caddr: tercer elemento
+(caddr '(a b c d))        ; => c
+
+; cadddr: cuarto elemento
+(cadddr '(a b c d e))     ; => d
+```
+
+### Construcción de Listas
+
+```lisp
+; append: concatena listas
+(append '(1 2) '(3 4))           ; => (1 2 3 4)
+(append '(a b) '(c d) '(e f))    ; => (a b c d e f)
+
+; cons: construye una lista (agrega elemento al inicio)
+(cons 1 '(2 3 4))        ; => (1 2 3 4)
+(cons 'a '(b c))         ; => (a b c)
+
+; list: crea una nueva lista
+(list 1 2 3)             ; => (1 2 3)
+(list 'a 'b 'c)          ; => (a b c)
+
+; length: obtiene el largo de una lista
+(length '(a b c))        ; => 3
+(length '(1 2 3 4 5))    ; => 5
+```
+
+### Búsqueda en Listas
+
+```lisp
+; member: verifica si un elemento está en la lista
+(member 2 '(1 2 3 4))           ; => (2 3 4)
+(member 'b '(a b c))            ; => (b c)
+(member 5 '(1 2 3 4))           ; => nil
+
+; assoc: busca en lista de asociación (pares clave-valor)
+(setq persona '((nombre . "Juan") (edad . 25) (ciudad . "Madrid")))
+(assoc 'nombre persona)         ; => (nombre . "Juan")
+(cdr (assoc 'edad persona))     ; => 25
+
+; mapcar: aplica una función a cada elemento
+(mapcar #'(lambda (x) (* x 2)) '(1 2 3 4))  ; => (2 4 6 8)
+(mapcar #'abs '(-1 -2 3 -4))                ; => (1 2 3 4)
+```
+
+### Ejemplo: Actividad de car y cdr
+
+Dada la lista `(a b (d l) (c x) m n)`:
+
+```lisp
+; Obtener (d l)
+(cadddr '(a b (d l) (c x) m n))         ; => (d l)
+
+; Obtener x
+(car (cdr (car (cddddr '(a b (d l) (c x) m n)))))  ; => x
+
+; Obtener d
+(car (cadddr '(a b (d l) (c x) m n)))   ; => d
+```
+
+---
+
+## Funciones Definidas por el Usuario
+
+### defun - Definir Funciones
+
+```lisp
+; Sintaxis: (defun nombre (parámetros) cuerpo)
+
+; Función simple
+(defun suma (a b)
+  (+ a b))
+
+(suma 5 3)  ; => 8
+
+; Función con múltiples operaciones
+(defun area-rectangulo (ancho alto)
+  (* ancho alto))
+
+(area-rectangulo 5 10)  ; => 50
+
+; Función recursiva: Factorial
 (defun factorial (x)
   (if (= x 0)
     1
-    (* x (factorial(- x 1)))
-  )
-)
+    (* x (factorial (- x 1)))))
 
-(defun finbonacci (x)
+(factorial 5)  ; => 120
+
+; Función recursiva: Fibonacci
+(defun fibonacci (x)
   (if (< x 2)
     1
-    (+ (finbonacci (- x 1)) (finbonacci (- x 2)))
+    (+ (fibonacci (- x 1)) (fibonacci (- x 2)))))
 
-  )
-)
+(fibonacci 6)  ; => 13
 
-;potencia con sumas
-(defun potencia (x y)
-  (if (= y 0)
-      1
-      (* x (potencia x (- y 1)))))
+; Potencia con multiplicaciones recursivas
+(defun potencia (base exponente)
+  (if (= exponente 0)
+    1
+    (* base (potencia base (- exponente 1)))))
 
+(potencia 2 8)  ; => 256
 
-;Divicion con resta
-(defun divicion (a b)
-    (if (= a 0)
-      0
-      (- divicion(a) b)
-    )
+; División usando restas
+(defun division (dividendo divisor)
+  (if (< dividendo divisor)
+    0
+    (+ 1 (division (- dividendo divisor) divisor))))
 
-)
-
-(defun holamundo ()
- ;(princ "Hola mundo")
- (format nil "Hola mundo")
-)
-
-
-
-(defun recorre (lista)
-  (setq elemento (car lista))
-  (format t "El valor de la lista es ~D~% " elemento)
-  (if lista
-    (recorre (cdr lista))
-  )
-)
-
-(defun evalua (a b)
-  (if (< a b)
-    (progn
-    (format t "Evaluacion del if ~%") ; el format t imprime las dos lineas
-    (format t "A < B")
-    )
-    (format nil "A > B") ;solo imprime esta linea con el format nil
-  )
-)
-
-(defun saluda (nombre)
-  (when (string = nombre "")
-    (format t "Hola, -a!-%" nombre)
-  )
-)
-
-(defun saludar(nombre)
-  (cond ((eq nombre 'juan) '(hola juan)) ;con el cond me permite hacer validaciones
-        ((eq nombre 'maria) '(hola maria))
-        ((eq nombre 'nombre) '(hola lupe))
-        (t '(no se quien seas))
-  )
-)
-
-(defun saludarse(nombre)
-  (case nombre
-        ((juan) '(hola juan))
-        ((maria) '(hola maria))
-        ((lupe) '(hola lupe))
-        (otherwise '(no se quien seas))
-  )
-)
+(division 20 3)  ; => 6
 ```
+
+### Funciones con Condicionales
+
+```lisp
+; Función con if
+(defun es-positivo (n)
+  (if (> n 0)
+    (format t "~a es positivo~%" n)
+    (format t "~a no es positivo~%" n)))
+
+; Función con when
+(defun paga-impuesto (ingresos)
+  (when (> ingresos 30000)
+    (format t "Debes pagar impuestos~%")))
+
+; Función con unless
+(defun acceso-permitido (edad)
+  (unless (< edad 18)
+    (format t "Puedes entrar~%")))
+
+; Función con cond
+(defun clasifica-numero (n)
+  (cond
+    ((< n 0) "Negativo")
+    ((= n 0) "Cero")
+    ((< n 10) "Pequeño")
+    ((< n 100) "Mediano")
+    (t "Grande")))
+
+(clasifica-numero 57)  ; => "Mediano"
+```
+
 ---
 
+## Ejercicios y Actividades
 
-#### **Actividad y  Ejercicios**
+### Actividad 1: Validar Paréntesis
 
-1.-Cuatro personas necesitan cruzar un puente de noche con un sola
-linterna. El puente es frágil y solo puede soportar a dos personas a
-la vez. Cada persona tarda diferentes tiempos en cruzar (1, 2 5 y 10
-minutos).  Cuando dos personas cruzan, lo hacen al ritmo del más lento
-¿Cómo pueden todos cruzar el puente en 17 minutos?
+Crear una función que valide si una cadena de paréntesis está balanceada:
 
+```lisp
+(defun validar-parentesis (cadena)
+  (let ((contador 0))
+    (loop for char across cadena
+      do (cond
+           ((char= char #\() (incf contador))
+           ((char= char #\)) (decf contador))))
+    (= contador 0)))
+
+(validar-parentesis "((()))")      ; => T
+(validar-parentesis "())()()")     ; => NIL
 ```
 
-X₁= 1, X₂=2, X₃=5, X₄=10
+### Actividad 2: Descomposición en Sumas
 
-V1=X₁ + X₂ = 3
-V2=V1 + X₁ = 4
-V3=V2 + X₁ + X₃ = 10
+Crear un algoritmo que imprima todas las posibles descomposiciones de un número como suma de números menores:
 
+```lisp
+; Ejemplo: 5 se descompone como:
+; 5
+; 4 + 1
+; 3 + 2
+; 3 + 1 + 1
+; 2 + 2 + 1
+; 2 + 1 + 1 + 1
+; 1 + 1 + 1 + 1 + 1
 ```
 
+### Actividad 3: Sueldo de Trabajador
 
+Calcular el sueldo con aumento según antigüedad:
 
-2.-En una calle hay cinco casas, cada una de un color distinto.  En cada
-casa vive una persona de distinta nacionalidad.  Cada dueño bebe un
-único tipo de bebida, fuma una sola marca de cigarrillos y tiene una
-mascota diferente a sus vecinos.  A partir de las 15 pistas
-presentadas a continuación, la consigna que hay que responder es:
-"¿Quién es el dueño del pez?".
+```lisp
+(defun calcular-sueldo (antiguedad)
+  (let ((sueldo-base 40000)
+        (aumento 0))
+    (cond
+      ((>= antiguedad 10) (setq aumento 0.10))
+      ((>= antiguedad 5) (setq aumento 0.07))
+      ((>= antiguedad 3) (setq aumento 0.05))
+      (t (setq aumento 0.03)))
+    (+ sueldo-base (* sueldo-base aumento))))
 
-El británico vive en la casa roja.
-El sueco tiene un perro como mascota.
-El danés toma té.
-El noruego vive en la primera casa.
-El alemán fuma Prince.
-La casa verde está inmediatamente a la izquierda de la blanca.
-El dueño de la casa verde bebe café.
-El propietario que fuma Pall Mall cría pájaros.
-El dueño de la casa amarilla fuma Dunhill.
-El hombre que vive en la casa del centro bebe leche.
-El vecino que fuma Blends vive al lado del que tiene un gato.
-El hombre que tiene un caballo vive al lado del que fuma Dunhill.
-El propietario que fuma Bluemaster toma cerveza.
-El vecino que fuma Blends viveal lado del que toma agua.
-El noruego vive al lado de la casa azul.
+(calcular-sueldo 12)  ; => 44000
+(calcular-sueldo 2)   ; => 41200
+```
 
+### Actividad 4: Nivel de Lavadora
 
+```lisp
+(defun nivel-lavadora (peso-libras)
+  (cond
+    ((>= peso-libras 30) "ERROR: Limite excedido")
+    ((>= peso-libras 22) "MÁXIMO: 150 litros")
+    ((>= peso-libras 15) "ALTO: 120 litros")
+    ((>= peso-libras 8)  "MEDIO: 80 litros")
+    (t "MÍNIMO: 40 litros")))
 
-**Problemas NP (problemas de juguete)**
+(nivel-lavadora 25)   ; => "MÁXIMO: 150 litros"
+(nivel-lavadora 10)   ; => "MEDIO: 80 litros"
+```
 
+### Actividad 5: Control de Acceso a Fiesta
 
-El granjero,el coyote, el pollo y el maiz
+```lisp
+(defun acceso-fiesta (edad)
+  (cond
+    ((> edad 15) "Puedes entrar pero con regalo")
+    ((= edad 15) "Puedes entrar totalmente gratis")
+    (t "No está permitido tu pase a la fiesta")))
 
-iiii        DDDD
+(acceso-fiesta 16)  ; => "Puedes entrar pero con regalo"
+(acceso-fiesta 15)  ; => "Puedes entrar totalmente gratis"
+(acceso-fiesta 14)  ; => "No está permitido tu pase a la fiesta"
+```
 
-![AcertijoGranjero](img/AcertijoGranjero.png) ![Granjerodiagrama](img/granjerodiagrama.png)
+---
 
+## Examen de Práctica
 
+### Preguntas Teóricas
 
+**1. Diferencias entre if, cond, when y unless:**
 
+| Estructura | Uso | Características |
+|-----------|-----|-----------------|
+| `if` | Dos ramas (verdadero/falso) | Requiere `progn` para múltiples acciones |
+| `cond` | Múltiples condiciones | Permite más de 2 opciones |
+| `when` | Solo rama verdadera | Permite múltiples acciones sin `progn` |
+| `unless` | Rama falsa | Negación de `when` |
 
+**2. car vs cdr:**
+
+- `car`: Retorna el primer elemento de una lista
+- `cdr`: Retorna el resto de la lista (sin el primer elemento)
+- Combinaciones: `caar`, `cadr`, `caddr`, `cadddr`, etc.
+
+### Ejercicios Resueltos
+
+#### Ejercicio 1: N-ésimo Elemento
+
+```lisp
+(defun n-esimo (n lista)
+  (if (= n 1)
+    (car lista)
+    (n-esimo (- n 1) (cdr lista))))
+
+(n-esimo 3 '(a b c d e))  ; => c
+```
+
+#### Ejercicio 2: Filtrar Positivos
+
+```lisp
+(defun filtra-positivos (lista)
+  (mapcar #'(lambda (x) (when (> x 0) x))
+          lista))
+
+(filtra-positivos '(-2 0 3 -5 7))  ; => (nil nil 3 nil 7)
+
+; Versión mejorada que realmente filtra:
+(defun filtra-positivos-v2 (lista)
+  (remove-if-not #'(lambda (x) (> x 0)) lista))
+
+(filtra-positivos-v2 '(-2 0 3 -5 7))  ; => (3 7)
+```
+
+#### Ejercicio 3: Clasificación de Números
+
+```lisp
+(defun clasifica-numero (n)
+  (cond
+    ((< n 0) "Negativo")
+    ((= n 0) "Cero")
+    ((<= n 10) "Pequeño")
+    ((<= n 100) "Mediano")
+    (t "Grande")))
+
+(clasifica-numero -5)   ; => "Negativo"
+(clasifica-numero 0)    ; => "Cero"
+(clasifica-numero 7)    ; => "Pequeño"
+(clasifica-numero 57)   ; => "Mediano"
+(clasifica-numero 500)  ; => "Grande"
+```
+
+#### Ejercicio 4: Suma de Pares
+
+```lisp
+(defun suma-pares (lista)
+  (let ((suma 0))
+    (dolist (n lista suma)
+      (unless (oddp n)
+        (setq suma (+ suma n))))))
+
+(suma-pares '(1 2 3 4 5 6))  ; => 12
+
+; Versión con recursión:
+(defun suma-pares-rec (lista)
+  (if (null lista)
+    0
+    (let ((n (car lista)))
+      (if (evenp n)
+        (+ n (suma-pares-rec (cdr lista)))
+        (suma-pares-rec (cdr lista))))))
+```
+
+#### Ejercicio 5: Procesamiento de Listas
+
+```lisp
+(defun procesa-lista (lista)
+  (cond
+    ((null lista) "Lista vacía")
+    ((numberp (car lista))
+     (if (> (car lista) 50)
+       "Grande"
+       "Pequeño"))
+    ((listp (car lista)) "Sublista detectada")
+    (t "Caso general")))
+
+(procesa-lista '())              ; => "Lista vacía"
+(procesa-lista '(60 1 2))        ; => "Grande"
+(procesa-lista '((1 2) 3 4))     ; => "Sublista detectada"
+(procesa-lista '(10 20 30))      ; => "Pequeño"
+```
+
+---
+
+## Problemas Clásicos y Desafíos
+
+### Problema 1: Cruzar el Puente con Linterna
+
+**Problema**: Cuatro personas necesitan cruzar un puente de noche con una sola linterna. El puente solo puede soportar a dos personas a la vez. Cada persona tarda diferentes tiempos en cruzar (1, 2, 5 y 10 minutos). Cuando dos personas cruzan, lo hacen al ritmo del más lento.
+
+**Pregunta**: ¿Cómo pueden todos cruzar el puente en 17 minutos?
+
+**Solución**:
+```
+Personas: X₁=1min, X₂=2min, X₃=5min, X₄=10min
+
+Paso 1: X₁ y X₂ cruzan → 2 minutos (X₂ es el más lento)
+Paso 2: X₁ regresa → 1 minuto
+Paso 3: X₃ y X₄ cruzan → 10 minutos (X₄ es el más lento)
+Paso 4: X₂ regresa → 2 minutos
+Paso 5: X₁ y X₂ cruzan → 2 minutos
+
+Total: 2 + 1 + 10 + 2 + 2 = 17 minutos ✓
+```
+
+### Problema 2: Las Cinco Casas (Acertijo de Einstein)
+
+**Problema**: En una calle hay cinco casas de colores diferentes. En cada casa vive una persona de una nacionalidad distinta. Cada propietario bebe una bebida única, fuma una marca de cigarrillos diferente y tiene una mascota distinta.
+
+**Pistas**:
+1. El británico vive en la casa roja
+2. El sueco tiene un perro
+3. El danés bebe té
+4. El noruego vive en la primera casa
+5. El alemán fuma Prince
+6. La casa verde está inmediatamente a la izquierda de la blanca
+7. El dueño de la casa verde bebe café
+8. El propietario que fuma Pall Mall cría pájaros
+9. El dueño de la casa amarilla fuma Dunhill
+10. El hombre del centro bebe leche
+11. El fumador de Blends vive al lado del que tiene un gato
+12. El que tiene un caballo vive al lado del fumador de Dunhill
+13. El fumador de Bluemaster bebe cerveza
+14. El fumador de Blends vive al lado del que bebe agua
+15. El noruego vive al lado de la casa azul
+
+**Pregunta**: ¿Quién es el dueño del pez?
+
+**Respuesta**: El ALEMÁN es el dueño del pez.
+
+### Problema 3: El Granjero, el Coyote, el Pollo y el Maíz
+
+**Problema**: Un granjero necesita cruzar un río con un coyote, un pollo y maíz. Su bote solo puede llevar al granjero y un item a la vez. Además:
+- El coyote se come al pollo si los deja solos
+- El pollo se come el maíz si los deja solos
+- El coyote no se come el maíz
+
+**Pregunta**: ¿Cómo cruzan todos el río?
+
+**Solución**:
+```
+Inicial: [G, C, P, M] | []
+
+1. G y P cruzan → [C, M] | [G, P]
+2. G regresa    → [G, C, M] | [P]
+3. G y C cruzan → [M] | [G, C, P]
+4. G y P regresan → [G, P, M] | [C]
+5. G y M cruzan → [P] | [G, C, M]
+6. G regresa    → [G, P] | [C, M]
+7. G y P cruzan → [] | [G, C, P, M] ✓
+```
+
+---
+
+## Arboles de Búsqueda y Listas de Asociación
+
+### Listas de Asociación (Alist)
+
+Una lista de asociación es una estructura que almacena pares clave-valor:
+
+```lisp
+; Definición de lista de asociación
+(setq persona '((nombre . "Juan") 
+                (edad . 25) 
+                (ciudad . "Madrid")
+                (profesion . "Programador")))
+
+; Acceso con assoc
+(assoc 'nombre persona)          ; => (nombre . "Juan")
+(assoc 'edad persona)            ; => (edad . 25)
+
+; Obtener solo el valor con cdr
+(cdr (assoc 'edad persona))      ; => 25
+(cdr (assoc 'ciudad persona))    ; => "Madrid"
+```
+
+### Ejemplo: Base de Datos de Nodos
+
+```lisp
+(defparameter *nodes* 
+  '((living-room 
+      (You are in the living-room. A wizard is snoring loudly on the couch.))
+    (garden 
+      (You are in a beautiful garden. There is a well in front of you.))
+    (attic 
+      (You are in the attic. There is a giant welding torch in the corner.))))
+
+; Acceder a nodos
+(assoc 'garden *nodes*)
+; => (GARDEN (YOU ARE IN A BEAUTIFUL GARDEN. ...))
+
+; Obtener descripción
+(cadr (assoc 'garden *nodes*))
+; => (YOU ARE IN A BEAUTIFUL GARDEN. THERE IS A WELL IN FRONT OF YOU.)
+```
+
+### Árbol Genealógico
+
+```lisp
+; Base de datos de relaciones familiares
+(defparameter *familia* 
+  '((juan (padre-de (carlos maria)))
+    (carlos (padre-de (luis)))
+    (maria (padre-de (ana pablo)))
+    (luis (padre-de ()))
+    (ana (padre-de ()))
+    (pablo (padre-de ()))))
+
+; Función para obtener hijos
+(defun obtener-hijos (persona familia)
+  (cadr (assoc persona familia)))
+
+(obtener-hijos 'juan *familia*)    ; => (CARLOS MARIA)
+(obtener-hijos 'carlos *familia*)  ; => (LUIS)
+```
+
+---
+
+## Archivos de Ejemplo del Proyecto
+
+Los siguientes archivos contienen implementaciones prácticas:
+
+- **arbologenalogico.lsp** - Implementación de árbol genealógico
+- **AreaVolumen.lsp** - Cálculos de área y volumen
+- **ejercicioClisp.lsp** - Ejercicios varios
+- **introClisp.lsp** - Introducción y conceptos básicos
+
+Todos estos archivos se encuentran en la carpeta `Clisp/` del proyecto.
+
+---
 
 
 
