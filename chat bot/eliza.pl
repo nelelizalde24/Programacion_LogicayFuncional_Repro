@@ -55,6 +55,38 @@ template([eres, s(_), '?'], [flagIs], [2]).
 
 template([como, estas, tu, '?'], [yo, estoy, bien, ',', gracias, por, preguntar, '.'], []).
 
+% === Búsqueda de Canciones ===
+% Buscar canciones por género: "quiero escuchar GENERO ." o "canciones de GENERO ."
+template([quiero, escuchar, s(_), '.'], [flagMusica], [2]).
+template([canciones, de, s(_), '.'], [flagMusica], [2]).
+template([dame, canciones, de, s(_), '.'], [flagMusica], [3]).
+template([musica, de, s(_), '.'], [flagMusica], [2]).
+
+% === Integración médica dentro del chat ===
+% Consultas en lenguaje natural para usar predicados médicos durante la conversación
+% Formato recomendado: "usar solo minusculas con punto . al final"
+
+% Probabilidad: "probabilidad de ENFERMEDAD para PACIENTE ."
+template([probabilidad, de, s(_), para, s(_), '.'], [flagProb], [2, 4]).
+
+% Riesgo: "riesgo de ENFERMEDAD para PACIENTE ."
+template([riesgo, de, s(_), para, s(_), '.'], [flagRisk], [2, 4]).
+
+% Reporte: "reporte de PACIENTE ." o "reporte para PACIENTE ."
+template([reporte, de, s(_), '.'], [flagReport], [2]).
+template([reporte, para, s(_), '.'], [flagReport], [2]).
+
+% Síntomas: "tengo SINTOMA ." o "siento SINTOMA ."
+template([tengo, s(_), '.'], [flagSintoma], [1]).
+template([siento, s(_), '.'], [flagSintoma], [1]).
+template([tengo, s(_), y, s(_), '.'], [flagSintoma2], [1, 3]).
+template([siento, s(_), y, s(_), '.'], [flagSintoma2], [1, 3]).
+
+% Consultar síntomas de una enfermedad: "cuales son los sintomas de ENFERMEDAD ."
+template([cuales, son, los, sintomas, de, s(_), '.'], [flagSintomasEnf], [5]).
+template([que, sintomas, tiene, s(_), '.'], [flagSintomasEnf], [3]).
+template([sintomas, de, s(_), '.'], [flagSintomasEnf], [2]).
+
 % Base de datos de enfermedades y síntomas
 % Tétanos
 tiene_sintoma(tetanos, rigidez_mandibula).
@@ -145,6 +177,105 @@ likes(deporte).
 likes(platicar).
 likes(viajar).
 
+% === Base de datos de Canciones por Género ===
+cancion(rock, 'Bohemian Rhapsody - Queen').
+cancion(rock, 'Hotel California - Eagles').
+cancion(rock, 'Stairway to Heaven - Led Zeppelin').
+cancion(rock, 'Sweet Child O Mine - Guns N Roses').
+cancion(rock, 'Comfortably Numb - Pink Floyd').
+cancion(rock, 'Paint It Black - The Rolling Stones').
+cancion(rock, 'Smells Like Teen Spirit - Nirvana').
+cancion(rock, 'Black - Pearl Jam').
+cancion(rock, 'Purple Haze - Jimi Hendrix').
+cancion(rock, 'Imagine - John Lennon').
+
+cancion(pop, 'Blinding Lights - The Weeknd').
+cancion(pop, 'Shape of You - Ed Sheeran').
+cancion(pop, 'Levitating - Dua Lipa').
+cancion(pop, 'Anti-Hero - Taylor Swift').
+cancion(pop, 'As It Was - Harry Styles').
+cancion(pop, 'Good as Hell - Lizzo').
+cancion(pop, 'Uptown Special - Billie Eilish').
+cancion(pop, 'Break My Soul - Beyonce').
+cancion(pop, 'Flowers - Miley Cyrus').
+cancion(pop, 'Love Me Like You Do - Ellie Goulding').
+
+cancion(reggaeton, 'Gasolina - Daddy Yankee').
+cancion(reggaeton, 'Tití Me Preguntó - Bad Bunny').
+cancion(reggaeton, 'Ella Baila Sola - Eslabón Armado').
+cancion(reggaeton, 'Dakiti - Bad Bunny').
+cancion(reggaeton, 'Razones - A.Norme').
+cancion(reggaeton, 'Mi Gente - J Balvin').
+cancion(reggaeton, 'Con Altura - Rosalía').
+cancion(reggaeton, 'Tití - Bad Bunny').
+cancion(reggaeton, 'Perreo - Ivy Queen').
+cancion(reggaeton, 'Yo No Eres Ni Roja Ni Morena - Enrique Iglesias').
+
+cancion(hiphop, 'Lose Yourself - Eminem').
+cancion(hiphop, 'God s Plan - Drake').
+cancion(hiphop, 'Hotline Bling - Drake').
+cancion(hiphop, 'In da Club - 50 Cent').
+cancion(hiphop, 'Snooze - SZA').
+cancion(hiphop, 'No Role Modelz - J Cole').
+cancion(hiphop, 'HUMBLE - Kendrick Lamar').
+cancion(hiphop, 'One Dance - Drake').
+cancion(hiphop, 'Bad Guy - Billie Eilish').
+cancion(hiphop, 'Rap God - Eminem').
+
+cancion(jazz, 'Take Five - Dave Brubeck').
+cancion(jazz, 'Autumn Leaves - Bill Evans').
+cancion(jazz, 'All the Things You Are - Charlie Parker').
+cancion(jazz, 'Fly Me to the Moon - Frank Sinatra').
+cancion(jazz, 'So What - Miles Davis').
+cancion(jazz, 'Body and Soul - John Coltrane').
+cancion(jazz, 'Giant Steps - John Coltrane').
+cancion(jazz, 'My Favorite Things - John Coltrane').
+cancion(jazz, 'Impressions - John Coltrane').
+cancion(jazz, 'In a Sentimental Mood - Duke Ellington').
+
+cancion(clasica, 'Moonlight Sonata - Beethoven').
+cancion(clasica, 'Swan Lake - Tchaikovsky').
+cancion(clasica, 'Canon in D - Pachelbel').
+cancion(clasica, 'Fur Elise - Beethoven').
+cancion(clasica, 'Eine kleine Nachtmusik - Mozart').
+cancion(clasica, 'The Four Seasons - Vivaldi').
+cancion(clasica, 'Clair de Lune - Debussy').
+cancion(clasica, 'Nocturne Op 9 No 2 - Chopin').
+cancion(clasica, 'Prelude in C Major - Bach').
+cancion(clasica, 'Pathetique - Beethoven').
+
+cancion(electrónica, 'Kernkraft 400 - Zombie Nation').
+cancion(electrónica, 'Strobe - Deadmau5').
+cancion(electrónica, 'Animals - Martin Garrix').
+cancion(electrónica, 'Clarity - Zedd').
+cancion(electrónica, 'Titanium - David Guetta').
+cancion(electrónica, 'Scary Monsters and Nice Sprites - Skrillex').
+cancion(electrónica, 'Hex Girlfriend - CHVRCHES').
+cancion(electrónica, 'Midnight City - M83').
+cancion(electrónica, 'Alone - Alan Walker').
+cancion(electrónica, 'Levels - Avicii').
+
+cancion(cumbia, 'Cali Pachanguero - Grupo Niche').
+cancion(cumbia, 'El Manisero - Beny More').
+cancion(cumbia, 'La Murga - Eddie Santiago').
+cancion(cumbia, 'Lloraras - Oscar D Leon').
+cancion(cumbia, 'A Pedir Su Mano - Juan Luis Guerra').
+cancion(cumbia, 'Mi Gente - Willie Colón').
+cancion(cumbia, 'Lloraras - Grupo Sálsa Viva').
+cancion(cumbia, 'El Cantante - Héctor Lavoe').
+cancion(cumbia, 'Timba en El Fondo - Los Van Van').
+cancion(cumbia, 'Lloraras - Héctor Lavoe').
+
+cancion(salsa, 'Lloraras - Oscar D Leon').
+cancion(salsa, 'A Pedir Su Mano - Juan Luis Guerra').
+cancion(salsa, 'Mi Gente - Willie Colón').
+cancion(salsa, 'El Cantante - Hector Lavoe').
+cancion(salsa, 'Lloraras - Grupo Salsa Viva').
+cancion(salsa, 'Lloraras - Hector Lavoe').
+cancion(salsa, 'Lloraras - Eddie Santiago').
+cancion(salsa, 'Lloraras - La Sonora Matancera').
+cancion(salsa, 'A Pedir Su Mano - Juan Luis Guerra').
+cancion(salsa, 'El Manisero - Beny More').
 
 
 % lo que hace eliza: flagDo
@@ -153,6 +284,24 @@ elizaDoes(X, R):- \+does(X), R = ['No', i, do, not, X ,'.', it, is, too, hard, f
 does(study).
 does(cook).
 does(work).
+
+% Predicado: buscar_canciones/2
+% Obtiene todas las canciones de un género específico (máximo 10)
+buscar_canciones(Genero, Canciones) :-
+	findall(Cancion, cancion(Genero, Cancion), TodasLasCanciones),
+	(TodasLasCanciones \== [] ->
+		% Limitar a 10 canciones máximo
+		length(TodasLasCanciones, N),
+		(N >= 10 ->
+			length(ListaDiez, 10),
+			append(ListaDiez, _, TodasLasCanciones),
+			Canciones = ListaDiez
+		;
+			Canciones = TodasLasCanciones
+		)
+	;
+		Canciones = ['No encontre canciones de ese genero']
+	).
 
 % lo que es eliza: flagIs
 elizaIs(X, R):- is0(X), R = ['Yes', yo, soy, X].
@@ -603,6 +752,14 @@ replace0([I|_], Input, _, Resp, R):-
 	X == flagLike,
 	elizaLikes(Atom, R).
 
+% Búsqueda de canciones por género
+replace0([I|_], Input, _, Resp, R):-
+	nth0(I, Input, Genero),
+	nth0(0, Resp, X),
+	X == flagMusica,
+	buscar_canciones(Genero, Canciones),
+	R = ['Aqui hay 10 canciones de', Genero, ':', Canciones, '.', 'Espero', 'que', 'disfrutes', 'la', 'musica', '!'].
+
 % Eliza does:
 replace0([I|_], Input, _, Resp, R):-
 	nth0(I, Input, Atom),
@@ -616,6 +773,88 @@ replace0([I|_], Input, _, Resp, R):-
 	nth0(0, Resp, X),
 	X == flagIs,
 	elizaIs(Atom, R).
+
+% Consulta médica: probabilidad
+replace0([Ienf, Ipac|_], Input, _, Resp, R):-
+	nth0(0, Resp, X),
+	X == flagProb,
+	nth0(Ienf, Input, Enfermedad),
+	nth0(Ipac, Input, Paciente),
+	( probabilidad(Paciente, Enfermedad, Porcentaje)
+	  -> format(atom(PercAtom), '~2f', [Porcentaje]),
+	     R = ['Probabilidad', 'de', Enfermedad, 'para', Paciente, ':', PercAtom, '%']
+	  ;  R = ['No', 'se', 'pudo', 'calcular', 'la', 'probabilidad']
+	).
+
+% Consulta médica: riesgo
+replace0([Ienf, Ipac|_], Input, _, Resp, R):-
+	nth0(0, Resp, X),
+	X == flagRisk,
+	nth0(Ienf, Input, Enfermedad),
+	nth0(Ipac, Input, Paciente),
+	( riesgo(Paciente, Enfermedad, Nivel)
+	  -> R = ['Riesgo', 'de', Enfermedad, 'para', Paciente, ':', Nivel]
+	  ;  R = ['No', 'se', 'pudo', 'determinar', 'el', 'riesgo']
+	).
+
+% Consulta médica: reporte (imprime reporte detallado y responde breve)
+replace0([Ipac|_], Input, _, Resp, R):-
+	nth0(0, Resp, X),
+	X == flagReport,
+	nth0(Ipac, Input, Paciente),
+	( reporte(Paciente)
+	  -> R = ['Reporte', 'generado', 'para', Paciente]
+	  ;  R = ['No', 'se', 'pudo', 'generar', 'el', 'reporte']
+	).
+
+% Consulta médica: síntoma único
+replace0([Isint|_], Input, _, Resp, R):-
+	nth0(0, Resp, X),
+	X == flagSintoma,
+	nth0(Isint, Input, Sintoma),
+	( findall(Enfermedad, tiene_sintoma(Enfermedad, Sintoma), Enfermedades),
+	  Enfermedades \== []
+	  -> length(Enfermedades, Num),
+	     (Num == 1
+	      -> Enfermedades = [E],
+	         R = ['El', 'sintoma', Sintoma, 'puede', 'indicar', E, '.', 'Te', 'recomiendo', 'consultar', 'un', 'medico', '.']
+	      ;  R = ['El', 'sintoma', Sintoma, 'aparece', 'en', 'varias', 'enfermedades', ':', Enfermedades, '.', 'Necesito', 'mas', 'informacion', '.']
+	     )
+	  ;  R = ['No', 'conozco', 'ese', 'sintoma', 'en', 'mi', 'base', 'de', 'datos', '.']
+	).
+
+% Consulta médica: dos síntomas
+replace0([Isint1, Isint2|_], Input, _, Resp, R):-
+	nth0(0, Resp, X),
+	X == flagSintoma2,
+	nth0(Isint1, Input, Sintoma1),
+	nth0(Isint2, Input, Sintoma2),
+	( findall(Enfermedad, (tiene_sintoma(Enfermedad, Sintoma1), tiene_sintoma(Enfermedad, Sintoma2)), Enfermedades),
+	  Enfermedades \== []
+	  -> length(Enfermedades, Num),
+	     (Num == 1
+	      -> Enfermedades = [E],
+	         gravedad_enfermedad(E, Gravedad),
+	         R = ['Los', 'sintomas', Sintoma1, 'y', Sintoma2, 'coinciden', 'con', E, '(', 'gravedad', ':', Gravedad, ')', '.', 'Busca', 'atencion', 'medica', '.']
+	      ;  R = ['Esos', 'sintomas', 'pueden', 'indicar', ':', Enfermedades, '.', 'Debes', 'ver', 'a', 'un', 'medico', 'pronto', '.']
+	     )
+	  ;  R = ['No', 'encuentro', 'enfermedades', 'con', 'ambos', 'sintomas', '.', 'Consulta', 'a', 'un', 'profesional', '.']
+	).
+
+% Consulta médica: síntomas de una enfermedad
+replace0([Ienf|_], Input, _, Resp, R):-
+	nth0(0, Resp, X),
+	X == flagSintomasEnf,
+	nth0(Ienf, Input, Enfermedad),
+	( enfermedad(Enfermedad)
+	  -> findall(S, tiene_sintoma(Enfermedad, S), Sintomas),
+	     ( Sintomas \== []
+	       -> gravedad_enfermedad(Enfermedad, Gravedad),
+	          R = ['Los', 'sintomas', 'de', Enfermedad, '(', 'gravedad', ':', Gravedad, ')', 'son', ':', Sintomas, '.']
+	       ;  R = ['No', 'hay', 'sintomas', 'registrados', 'para', Enfermedad, '.']
+	     )
+	  ;  R = ['No', 'conozco', 'esa', 'enfermedad', '.', 'Las', 'enfermedades', 'que', 'conozco', 'son', ':', 'tetanos', ',', 'varicela', ',', 'zika', ',', 'meningitis', ',', 'neumonia', ',', 'dengue_hemorragico', '.']
+	).
 
 replace0([I|Index], Input, N, Resp, R):-
 	length(Index, M), M =:= 0,
