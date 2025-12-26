@@ -8,12 +8,16 @@
     (luvia :genero femenino :relacion tia :lado familia_mama :caracteristicas (gorda peloNegro tesBlanca))
     (flor :genero femenino :relacion tia :lado familia_mama :caracteristicas (delgada peloCastano tesBlanca))
     (yaneri :genero femenino :relacion prima :lado familia_mama :caracteristicas (delgada peloNegro tesBlanca))
+    (diego :genero masculino :relacion primo :lado familia_mama :caracteristica (delgado peloNegro tesBlanca))
+    (rube :genero masculino :relacion tio :lado familia_mama :caracteristica (gordo peloNegro tesMorena))
     
     ;; FAMILIA PATERNA (PADRE FEMENINO)
     (lorena :genero femenino :relacion tia :lado familia_papa :caracteristicas (delgada tesBlanca alta))
     (chuy :genero femenino :relacion tia :lado familia_papa :caracteristicas (delgada tesMorena alta))
     (mima :genero femenino :relacion tia :lado familia_papa :caracteristicas (delgada tesMorena alta))
     (gaby :genero femenino :relacion tia :lado familia_papa :caracteristicas (gorda tesMorena alta))
+    (ruud :genero masculino :relacion primo :lado familia_papa :caracteristica (delgado tesMorena alto))
+    (chema :genero masculino :relacion tio: lado familia_papa :caracteristica (delgado tesMorena medio))
 ))
 
 ;;; Función para buscar una persona por nombre

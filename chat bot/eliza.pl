@@ -87,6 +87,14 @@ template([cuales, son, los, sintomas, de, s(_), '.'], [flagSintomasEnf], [5]).
 template([que, sintomas, tiene, s(_), '.'], [flagSintomasEnf], [3]).
 template([sintomas, de, s(_), '.'], [flagSintomasEnf], [2]).
 
+% Consultar tratamiento de una enfermedad: "cual es el tratamiento de ENFERMEDAD ."
+template([cual, es, el, tratamiento, de, s(_), '.'], [flagTratamiento], [5]).
+template([cual, es, el, tratamiento, para, s(_), '.'], [flagTratamiento], [5]).
+template([tratamiento, de, s(_), '.'], [flagTratamiento], [2]).
+template([tratamiento, para, s(_), '.'], [flagTratamiento], [2]).
+template([como, se, trata, s(_), '.'], [flagTratamiento], [3]).
+template([que, tratamiento, tiene, s(_), '.'], [flagTratamiento], [3]).
+
 % Base de datos de enfermedades y síntomas
 % Tétanos
 tiene_sintoma(tetanos, rigidez_mandibula).
@@ -176,6 +184,7 @@ likes(ejercicio).
 likes(deporte).
 likes(platicar).
 likes(viajar).
+likes(musica).
 
 % === Base de datos de Canciones por Género ===
 cancion(rock, 'Bohemian Rhapsody - Queen').
@@ -854,6 +863,17 @@ replace0([Ienf|_], Input, _, Resp, R):-
 	       ;  R = ['No', 'hay', 'sintomas', 'registrados', 'para', Enfermedad, '.']
 	     )
 	  ;  R = ['No', 'conozco', 'esa', 'enfermedad', '.', 'Las', 'enfermedades', 'que', 'conozco', 'son', ':', 'tetanos', ',', 'varicela', ',', 'zika', ',', 'meningitis', ',', 'neumonia', ',', 'dengue_hemorragico', '.']
+	).
+
+% Consulta médica: tratamiento de una enfermedad
+replace0([Ienf|_], Input, _, Resp, R):-
+	nth0(0, Resp, X),
+	X == flagTratamiento,
+	nth0(Ienf, Input, Enfermedad),
+	( tratamiento(Enfermedad, Tratamiento)
+	  -> gravedad_enfermedad(Enfermedad, Gravedad),
+	     R = ['El', 'tratamiento', 'para', Enfermedad, '(', 'gravedad', ':', Gravedad, ')', 'es', ':', Tratamiento, '.', 'Por', 'favor', ',', 'consulta', 'a', 'un', 'medico', 'profesional', '.']
+	  ;  R = ['No', 'conozco', 'el', 'tratamiento', 'para', Enfermedad, '.', 'Las', 'enfermedades', 'que', 'conozco', 'son', ':', 'tetanos', ',', 'varicela', ',', 'zika', ',', 'meningitis', ',', 'neumonia', ',', 'dengue_hemorragico', '.']
 	).
 
 replace0([I|Index], Input, N, Resp, R):-
